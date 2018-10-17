@@ -1,0 +1,38 @@
+.mt-1 {
+margin-top: 1rem;
+}
+.mt-2 {
+margin-top: 2rem;
+}
+.mt-3 {
+margin-top: 3rem;
+}
+.mt-4 {
+margin-top: 4rem;
+}  
+
+.width-1 {
+    width: 30px;
+}
+.width-2 {
+    width: 2rem;
+}
+.width-3 {
+    width: 3rem;
+}
+.width-4 {
+    width: 4rem;
+}  
+  
+.input-symbol-real {
+    position: relative;
+}
+.input-symbol-real input {
+    padding-left:20px;
+}
+.input-symbol-real:before {
+    position: absolute;
+    bottom: 7px;
+    content:"R$";
+    left: 5px;
+}

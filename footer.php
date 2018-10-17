@@ -38,6 +38,9 @@
 <script src="bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
+<!-- Mascaras -->
+<script src="dist/js/jquery.mask.min.js"></script>
+<script src="dist/js/mascaras.js"></script>
 
 
 <!-- DataTables -->
@@ -63,6 +66,8 @@
 
    //Date picker
    $('#datepicker').datepicker({
+    format: 'dd/mm/yyyy',                
+    language: 'pt-BR',
       autoclose: true
     })
 </script>
