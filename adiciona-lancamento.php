@@ -23,7 +23,7 @@ require_once 'banco.php';
       <?php 
       
       $data = $_POST["data"];
-      $date_for_database = date ("Y-m-d H:i:s", strtotime($data)); //Transforma data para formato do BD
+      $date_for_database = date("Y-m-d",strtotime(str_replace('/','-',$data))); //Transforma data para formato do BD
       $motorista = $_POST["motorista"];
       $empresa = $_POST["empresa"];
       $produto = $_POST["produto"];

@@ -68,7 +68,10 @@
    $('#datepicker').datepicker({
     format: 'dd/mm/yyyy',                
     language: 'pt-BR',
-      autoclose: true
+      autoclose: true,
+      todayBtn: "linked",
+      todayHighlight : true,
+      orientation: "left",
     })
 </script>
 </body>

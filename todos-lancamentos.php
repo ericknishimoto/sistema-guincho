@@ -71,22 +71,30 @@ $lancamentos = listaLancamentos($conexao);
                   <th>Empresa</th>
                   <th>Produto</th>
                   <th>Serviço</th>
+                  <th>Ações</th>
                 </tr>
                 </thead>
                 <tbody>
 
                 <?php
                 foreach ($lancamentos as $lancamento) {
+                $data = date('d-m-Y', strtotime(str_replace('-','/', $lancamento['data'])));
+                $data_convertida = str_replace('-','/', $data);
                 ?>
-                  <tr>
-                  <!-- utf8_encode() codifica a string para utf-8 -->
-                    <td><?= utf8_encode($lancamento['id']) ?></td>
-                    <td><?= utf8_encode($lancamento['data']) ?></td>
-                    <td><?= utf8_encode($lancamento['motorista_nome']) ?></td>
-                    <td><?= utf8_encode($lancamento['empresa_nome']) ?></td>
-                    <td><?= utf8_encode($lancamento['produto_nome']) ?></td>
-                    <td><?= utf8_encode($lancamento['servico_nome']) ?></td>
+                      <!-- utf8_encode() codifica a string para utf-8 -->
+                      <td><?= utf8_encode($lancamento['id']) ?></td>
+                      <td><?= utf8_encode($data_convertida) ?></td>
+                      <td><?= utf8_encode($lancamento['motorista_nome']) ?></td>
+                      <td><?= utf8_encode($lancamento['empresa_nome']) ?></td>
+                      <td><?= utf8_encode($lancamento['produto_nome']) ?></td>
+                      <td><?= utf8_encode($lancamento['servico_nome']) ?></td>
+                      <td class="text-center">
+                        <a href="lancamento.php?id=<?= $lancamento['id'] ?>" class="btn btn-default"><i class="fa fa-eye"></i></a>
+                        <a href="lancamento.php?id=<?= $lancamento['id'] ?>" class="btn btn-default"><i class="fa fa-pencil"></i></a>
+                        <a href="lancamento.php?id=<?= $lancamento['id'] ?>" class="btn btn-default"><i class="fa fa-trash-o"></i></a>
+                      </td>
                   </tr>
+
                 <?php
                 }
                 ?>

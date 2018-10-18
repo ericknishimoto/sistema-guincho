@@ -71,11 +71,58 @@ function listaLancamentos($conexao)
     on s.id = l.servicos_id
     ");
 
+  while ($lancamento = mysqli_fetch_assoc($resultado)) {
+    array_push($lancamentos, $lancamento);
+  }
+  return $lancamentos;
+}
 
-//motorista_nome
-//empresa_nome
-//produto_nome
-//servico_nome
+function listaLancamento($conexao, $id)
+{
+  $lancamentos = array();
+  $resultado = mysqli_query($conexao, "
+  select
+  l.id as id,
+  l.data as data,
+  m.nome as motorista_nome,
+  e.nome as empresa_nome,
+  p.nome as produto_nome,
+  s.nome as servico_nome,
+  
+  workorder,
+  ref_externa,
+  veiculo,
+  placa,
+  km_total,
+  pedagio,
+  extras,
+  origem,
+  destino,
+  val_total,
+  val_total_empresa,
+  obs
+  
+  from
+
+  motoristas as m
+
+  join lancamentos as l
+  on m.id = l.motoristas_id
+
+  join empresas as e
+  on e.id = l.empresas_id
+
+  join produtos as p
+  on p.id = l.produtos_id
+
+  join servicos as s
+  on s.id = l.servicos_id
+
+  where
+
+  l.id = $id
+
+  ");
 
   while ($lancamento = mysqli_fetch_assoc($resultado)) {
     array_push($lancamentos, $lancamento);
