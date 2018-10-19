@@ -121,6 +121,8 @@ $lancamentos = listaLancamentos($conexao);
                   <th>Empresa</th>
                   <th>Produto</th>
                   <th>Serviço</th>
+                  <th>Total</th>
+                  <th>Total Empresa</th>
                   <th clas="text-center">Ações</th>
                 </tr>
                 </thead>
@@ -141,6 +143,12 @@ $lancamentos = listaLancamentos($conexao);
                       <td><?= $lancamento['empresa_nome'] ?></td>
                       <td><?= $lancamento['produto_nome'] ?></td>
                       <td><?= $lancamento['servico_nome'] ?></td>
+                      <td>R$ <?= str_replace('.',',', $lancamento['val_total']) ?>
+                        <input type="hidden" id="val_total" value="<?= $lancamento['val_total'] ?>" />
+                      </td>
+                      <td>R$ <?= str_replace('.',',', $lancamento['val_total_empresa']) ?>
+                        <input type="hidden" id="val_total_empresa" value="<?= $lancamento['val_total_empresa'] ?>" />
+                      </td>
                       <td class="text-center">
                         <a href="lancamento.php?id=<?= $lancamento['id'] ?>" class="btn btn-default"><i class="fa fa-eye"></i></a>
                         <a href="form-altera-lancamento.php?id=<?= $lancamento['id'] ?>" class="btn btn-default"><i class="fa fa-pencil"></i></a>
@@ -156,13 +164,10 @@ $lancamentos = listaLancamentos($conexao);
                 </tbody>
                 <tfoot>
                 <tr>
-                <th>#Ordem</th>
-                <th>Data</th>
-                <th>Motorista</th>
-                <th>Empresa</th>
-                <th>Produto</th>
-                <th>Serviço</th>
-                <th class="text-center">Ações</th>
+                <th colspan="3">Total:</th>
+                <th id="somaValTotal"></th>
+                <th colspan="4">Total Empresa:</th>
+                <th id="somaValTotalEmpresa"></th>
                 </tr>
                 </tfoot>
               </table>

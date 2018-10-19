@@ -52,70 +52,137 @@
 <!-- page script -->
 <script>
 
-$('a[data-target="#modal-delete"]').on('click', function (e) { 
-    e.preventDefault();
-    var url = $(this).data('url');
-    var id = $(this).data('id');
+  $('a[data-target="#modal-delete"]').on('click', function (e) { 
+      e.preventDefault();
+      var url = $(this).data('url');
+      var id = $(this).data('id');
 
-    $('.delete').attr('href', url + id);
-    $('#modal-delete').modal('show');
-    return false;
-});
+      $('.delete').attr('href', url + id);
+      $('#modal-delete').modal('show');
+      return false;
+  });
 
-$('a[data-target="#modal-altera"]').on('click', function (e) { 
-    e.preventDefault();
-    var id = $(this).data('id');
-    var nome = $(this).data('nome');
+  $('a[data-target="#modal-altera"]').on('click', function (e) { 
+      e.preventDefault();
+      var id = $(this).data('id');
+      var nome = $(this).data('nome');
 
-    $('.altera-id').val(id);
-    $('.altera-nome').val(nome);
-    $('#modal-altera').modal('show');
-    return false;
-});
+      $('.altera-id').val(id);
+      $('.altera-nome').val(nome);
+      $('#modal-altera').modal('show');
+      return false;
+  });
 
-$('a[data-target="#modal-altera-motorista"]').on('click', function (e) { 
-    e.preventDefault();
-    var id = $(this).data('id');
-    var nome = $(this).data('nome');
-    var cpf = $(this).data('cpf');
+  $('a[data-target="#modal-altera-motorista"]').on('click', function (e) { 
+      e.preventDefault();
+      var id = $(this).data('id');
+      var nome = $(this).data('nome');
+      var cpf = $(this).data('cpf');
 
-    $('.altera-id').val(id);
-    $('.altera-nome').val(nome);
-    $('.altera-cpf').val(cpf);
-    $('#modal-altera-motorista').modal('show');
-    return false;
-});
+      $('.altera-id').val(id);
+      $('.altera-nome').val(nome);
+      $('.altera-cpf').val(cpf);
+      $('#modal-altera-motorista').modal('show');
+      return false;
+  });
 
-  $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : true,
-      'responsive'  : true
-    })
-  })
+  $('a[data-target="#modal-altera-produto"]').on('click', function (e) { 
+      e.preventDefault();
+      var id = $(this).data('id');
+      var nome = $(this).data('nome');
+      var empresa = $(this).data('empresa');
+
+      $('.altera-id').val(id);
+      $('.altera-nome').val(nome);
+      $('.altera-empresa').val(empresa);
+      $('#modal-altera-produto').modal('show');
+      return false;
+  });
 
     $(function () {
-    $('#tabela').DataTable({
-      'paging'      : false,
-      'lengthMenu'  : false,
-      'responsive'  : true
+      $('#example1').DataTable()
+      $('#example2').DataTable({
+        'paging'      : true,
+        'lengthChange': false,
+        'searching'   : false,
+        'ordering'    : true,
+        'info'        : true,
+        'autoWidth'   : true,
+        'responsive'  : true
+      })
     })
-  })
 
-   //Date picker
-   $('#datepicker').datepicker({
-    format: 'dd/mm/yyyy',                
-    language: 'pt-BR',
-      autoclose: true,
-      todayBtn: "linked",
-      todayHighlight : true,
-      orientation: "left",
+      $(function () {
+      $('#tabela').DataTable({
+        'paging'      : false,
+        'lengthMenu'  : false,
+        'responsive'  : true
+      })
     })
+
+    //Date picker
+    $('#datepicker').datepicker({
+      format: 'dd/mm/yyyy',                
+      language: 'pt-BR',
+        autoclose: true,
+        todayBtn: "linked",
+        todayHighlight : true,
+        orientation: "left",
+      })
+</script>
+<script>
+$(document).ready(function(){
+
+    let valTotal = document.querySelectorAll("#val_total"); //Seleciona todas as ID ##val_total e captura o valor.
+    let somaValTotal = 0;
+
+    let valTotalEmpresa = document.querySelectorAll("#val_total_empresa"); //Seleciona todas as ID ##val_total e captura o valor.
+    let somaValTotalEmpresa = 0;
+
+    for (var i = 0; i < valTotal.length; i++ ){
+      valor = parseFloat(valTotal[i].value);
+      somaValTotal =  somaValTotal + valor
+
+      var thValTotal = document.querySelector("#somaValTotal");
+      thValTotal.innerHTML = "R$" + parseFloat(somaValTotal).toFixed(2);
+
+    }
+
+    for (var i = 0; i < valTotalEmpresa.length; i++ ){
+      valor = parseFloat(valTotalEmpresa[i].value);
+      somaValTotalEmpresa =  somaValTotalEmpresa + valor
+  
+      var thValTotalEmpresa = document.querySelector("#somaValTotalEmpresa");
+      thValTotalEmpresa.innerHTML = "R$" + parseFloat(somaValTotalEmpresa).toFixed(2);
+    }
+
+  var campoFiltro = document.querySelector("[type=search]");
+  campoFiltro.addEventListener("input", function(){ //input: escuta o input de dados;
+    let valTotal = document.querySelectorAll("#val_total"); //Seleciona todas as ID ##val_total e captura o valor.
+    let somaValTotal = 0;
+
+    let valTotalEmpresa = document.querySelectorAll("#val_total_empresa"); //Seleciona todas as ID ##val_total e captura o valor.
+    let somaValTotalEmpresa = 0;
+
+    for (var i = 0; i < valTotal.length; i++ ){
+      valor = parseFloat(valTotal[i].value);
+      somaValTotal =  somaValTotal + valor
+
+      var thValTotal = document.querySelector("#somaValTotal");
+      thValTotal.innerHTML = "R$" + parseFloat(somaValTotal).toFixed(2);
+
+    }
+
+    for (var i = 0; i < valTotalEmpresa.length; i++ ){
+      valor = parseFloat(valTotalEmpresa[i].value);
+      somaValTotalEmpresa =  somaValTotalEmpresa + valor
+  
+      var thValTotalEmpresa = document.querySelector("#somaValTotalEmpresa");
+      thValTotalEmpresa.innerHTML = "R$" + parseFloat(somaValTotalEmpresa).toFixed(2);
+    }
+  
+  })
+});
 </script>
 </body>
 </html>

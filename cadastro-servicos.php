@@ -3,7 +3,7 @@ require_once 'header.php';
 require_once 'conecta.php';
 require_once 'banco.php';
 
-$motoristas = listaMotoristas($conexao);
+$servicos = listaServicos($conexao);
 
 ?>
 
@@ -12,13 +12,13 @@ $motoristas = listaMotoristas($conexao);
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Motoristas
-        <small>cadastro de motoristas</small>
+        Serviços
+        <small>cadastro de serviços</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
         <li>Cadastros</li>
-        <li class="active">Motoristas</li>
+        <li class="active">Serviços</li>
       </ol>
     </section>
 
@@ -39,7 +39,7 @@ $motoristas = listaMotoristas($conexao);
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            O motorista foi cadastrado com sucesso!
+            O serviço foi cadastrada com sucesso!
             </div>
             <!-- /.box-body -->
           </div>
@@ -63,7 +63,7 @@ $motoristas = listaMotoristas($conexao);
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            O motorista foi alterado com sucesso!
+            O serviço foi alterado com sucesso!
             </div>
             <!-- /.box-body -->
           </div>
@@ -87,7 +87,7 @@ $motoristas = listaMotoristas($conexao);
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            O motorista foi excluído com sucesso!
+            O serviço foi excluído com sucesso!
             </div>
             <!-- /.box-body -->
           </div>
@@ -112,7 +112,7 @@ $motoristas = listaMotoristas($conexao);
               <!-- /.box-header -->
               <div class="box-body">
               Não foi possível excluir.<br>
-              Porque o motorista possui lançamentos associados.
+              Porque o serviço possui lançamento associado.
               </div>
               <!-- /.box-body -->
             </div>
@@ -124,7 +124,7 @@ $motoristas = listaMotoristas($conexao);
     <div class="row">
       <div class="col-xs-7 col-md-3">
         <button type="button" class="btn btn-success margin-bottom" data-toggle="modal" data-target="#modal-novo">
-            <span>Novo Motorista</span>
+            <span>Nova Serviço</span>
           </button>
       </div>
     </div>
@@ -134,7 +134,7 @@ $motoristas = listaMotoristas($conexao);
 
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Todos motoristas</h3>
+              <h3 class="box-title">Todos serviços</h3>
             </div>
             <!-- /.box-header -->
             <!-- TABLE -->
@@ -144,22 +144,20 @@ $motoristas = listaMotoristas($conexao);
                 <tr>
                   <th>#ID</th>
                   <th>Nome</th>
-                  <th>CPF</th>
                   <th class="text-center">Ações</th>
                 </tr>
                 </thead>
                 <tbody>
 
                 <?php
-                foreach ($motoristas as $motorista) {
+                foreach ($servicos as $servico) {
                 ?>
 
-                      <td><?= $motorista['id'] ?></td>
-                      <td><?= $motorista['nome'] ?></td>
-                      <td><?= $motorista['cpf'] ?></td>
+                      <td><?= $servico['id'] ?></td>
+                      <td><?= $servico['nome'] ?></td>
                       <td class="text-center">
-                      <a data-url="altera-motorista.php?id=" data-id="<?= $motorista['id'] ?>" data-nome="<?= $motorista['nome'] ?>" data-cpf="<?= $motorista['cpf'] ?>" class="btn btn-default mr-1" data-toggle="modal" data-target="#modal-altera-motorista"><i class="fa fa-pencil"></i></a>
-                      <a data-url="exclui-motorista.php?id=" data-id="<?= $motorista['id'] ?>" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete">
+                        <a data-url="altera-servico.php?id=" data-id="<?= $servico['id'] ?>" data-nome="<?= $servico['nome'] ?>" class="btn btn-default mr-1" data-toggle="modal" data-target="#modal-altera"><i class="fa fa-pencil"></i></a>
+                        <a data-url="exclui-servico.php?id=" data-id="<?= $servico['id'] ?>" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete">
                           <i class="fa fa-trash-o"></i>
                         </a>
                       </td>
@@ -189,26 +187,17 @@ $motoristas = listaMotoristas($conexao);
       <div class="modal-content">
         <div class="modal-header modal-success">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Novo Motorista</h4>
+          <h4 class="modal-title" id="myModalLabel">Nova Serviço</h4>
         </div>
         <div class="modal-body">
-          <form action="adiciona-motorista.php" id="form" method="POST">
+          <form action="adiciona-servico.php" id="form" method="POST">
             <div class="row">
               <div class="col-xs-12">
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="form-group mt-1">
-                      <label>Nome completo:</label>
+                      <label>Nome:</label>
                       <input type="text" required name="nome" class="form-control">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-xs-12">
-                    <div class="form-group">
-                      <label>CPF:</label>
-                      <input type="text" name="cpf" class="form-control">
                     </div>
                   </div>
                 </div>
@@ -225,32 +214,23 @@ $motoristas = listaMotoristas($conexao);
   </div>
 
 <!-- MODAL ALTERAR -->
-<div class="modal fade" id="modal-altera-motorista" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="modal-altera" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header modal-success">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Alterar Motorista</h4>
+          <h4 class="modal-title" id="myModalLabel">Alterar Serviço</h4>
         </div>
         <div class="modal-body">
-          <form action="altera-motorista.php" id="form-alterar" method="POST">
-            <input type="hidden" name="id" class="altera-id"/>
+          <form action="altera-servico.php" id="form-altera" method="POST">
+          <input type="hidden" name="id" class="altera-id"/>
             <div class="row">
               <div class="col-xs-12">
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="form-group mt-1">
-                      <label>Nome completo:</label>
+                      <label>Nome:</label>
                       <input type="text" required name="nome" class="form-control altera-nome">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-xs-12">
-                    <div class="form-group">
-                      <label>CPF:</label>
-                      <input type="text" required name="cpf" class="form-control altera-cpf">
                     </div>
                   </div>
                 </div>
@@ -259,7 +239,7 @@ $motoristas = listaMotoristas($conexao);
           </form>
         </div>
         <div class="modal-footer">
-          <button type="submit" form="form-alterar" class="btn btn-success" value="Submit">Alterar</button>
+          <button type="submit" form="form-altera" class="btn btn-success" value="Submit">Alterar</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
@@ -272,10 +252,10 @@ $motoristas = listaMotoristas($conexao);
     <div class="modal-content">
       <div class="modal-header modal-danger">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Excluir motorista</h4>
+        <h4 class="modal-title" id="myModalLabel">Excluir Serviço</h4>
       </div>
       <div class="modal-body">
-        Deseja realmente exluir este motorista?
+        Deseja realmente exluir este serviço?
       </div>
       <div class="modal-footer">
         <a type="button" class="btn btn-danger delete">Excluir</a>

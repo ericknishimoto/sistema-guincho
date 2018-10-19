@@ -111,8 +111,8 @@ $empresas = listaEmpresas($conexao);
               </div>
               <!-- /.box-header -->
               <div class="box-body">
-              Não foi possível excluir,<br>
-              pois a empresa possui lançamento associado.
+              Não foi possível excluir.<br>
+              Porque a empresa possui lançamento associado.
               </div>
               <!-- /.box-body -->
             </div>

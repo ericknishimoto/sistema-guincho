@@ -3,7 +3,8 @@ require_once 'header.php';
 require_once 'conecta.php';
 require_once 'banco.php';
 
-$motoristas = listaMotoristas($conexao);
+$produtos = listaProdutos($conexao);
+$empresas = listaEmpresas($conexao);
 
 ?>
 
@@ -12,18 +13,18 @@ $motoristas = listaMotoristas($conexao);
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Motoristas
-        <small>cadastro de motoristas</small>
+        Produtos
+        <small>cadastro de produtos</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
         <li>Cadastros</li>
-        <li class="active">Motoristas</li>
+        <li class="active">Produtos</li>
       </ol>
     </section>
 
-    <!-- Main content -->
-    <section class="content">
+<!-- Main content -->
+<section class="content">
 
 <?php if(isset($_GET["cadastro"]) && $_GET["cadastro"]==true) {
 ?>
@@ -39,7 +40,7 @@ $motoristas = listaMotoristas($conexao);
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            O motorista foi cadastrado com sucesso!
+            O produto foi cadastrado com sucesso!
             </div>
             <!-- /.box-body -->
           </div>
@@ -63,7 +64,7 @@ $motoristas = listaMotoristas($conexao);
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            O motorista foi alterado com sucesso!
+            O produto foi alterado com sucesso!
             </div>
             <!-- /.box-body -->
           </div>
@@ -87,7 +88,7 @@ $motoristas = listaMotoristas($conexao);
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            O motorista foi excluído com sucesso!
+            O produto foi excluído com sucesso!
             </div>
             <!-- /.box-body -->
           </div>
@@ -112,7 +113,7 @@ $motoristas = listaMotoristas($conexao);
               <!-- /.box-header -->
               <div class="box-body">
               Não foi possível excluir.<br>
-              Porque o motorista possui lançamentos associados.
+              Porque o produto possui lançamentos associados.
               </div>
               <!-- /.box-body -->
             </div>
@@ -124,7 +125,7 @@ $motoristas = listaMotoristas($conexao);
     <div class="row">
       <div class="col-xs-7 col-md-3">
         <button type="button" class="btn btn-success margin-bottom" data-toggle="modal" data-target="#modal-novo">
-            <span>Novo Motorista</span>
+            <span>Novo Produto</span>
           </button>
       </div>
     </div>
@@ -134,7 +135,7 @@ $motoristas = listaMotoristas($conexao);
 
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Todos motoristas</h3>
+              <h3 class="box-title">Todos produtos</h3>
             </div>
             <!-- /.box-header -->
             <!-- TABLE -->
@@ -144,22 +145,22 @@ $motoristas = listaMotoristas($conexao);
                 <tr>
                   <th>#ID</th>
                   <th>Nome</th>
-                  <th>CPF</th>
+                  <th>Empresa</th>
                   <th class="text-center">Ações</th>
                 </tr>
                 </thead>
                 <tbody>
 
                 <?php
-                foreach ($motoristas as $motorista) {
+                foreach ($produtos as $produto) {
                 ?>
 
-                      <td><?= $motorista['id'] ?></td>
-                      <td><?= $motorista['nome'] ?></td>
-                      <td><?= $motorista['cpf'] ?></td>
+                      <td><?= $produto['id'] ?></td>
+                      <td><?= $produto['nome'] ?></td>
+                      <td><?= $produto['empresas_nome'] ?></td>
                       <td class="text-center">
-                      <a data-url="altera-motorista.php?id=" data-id="<?= $motorista['id'] ?>" data-nome="<?= $motorista['nome'] ?>" data-cpf="<?= $motorista['cpf'] ?>" class="btn btn-default mr-1" data-toggle="modal" data-target="#modal-altera-motorista"><i class="fa fa-pencil"></i></a>
-                      <a data-url="exclui-motorista.php?id=" data-id="<?= $motorista['id'] ?>" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete">
+                      <a data-url="altera-produto.php?id=" data-id="<?= $produto['id'] ?>" data-nome="<?= $produto['nome'] ?>" data-empresa="<?= $produto['empresas_id'] ?>" class="btn btn-default mr-1" data-toggle="modal" data-target="#modal-altera-produto"><i class="fa fa-pencil"></i></a>
+                      <a data-url="exclui-produto.php?id=" data-id="<?= $produto['id'] ?>" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete">
                           <i class="fa fa-trash-o"></i>
                         </a>
                       </td>
@@ -189,16 +190,16 @@ $motoristas = listaMotoristas($conexao);
       <div class="modal-content">
         <div class="modal-header modal-success">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Novo Motorista</h4>
+          <h4 class="modal-title" id="myModalLabel">Novo produto</h4>
         </div>
         <div class="modal-body">
-          <form action="adiciona-motorista.php" id="form" method="POST">
+          <form action="adiciona-produto.php" id="form" method="POST">
             <div class="row">
               <div class="col-xs-12">
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="form-group mt-1">
-                      <label>Nome completo:</label>
+                      <label>Nome:</label>
                       <input type="text" required name="nome" class="form-control">
                     </div>
                   </div>
@@ -207,8 +208,13 @@ $motoristas = listaMotoristas($conexao);
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="form-group">
-                      <label>CPF:</label>
-                      <input type="text" name="cpf" class="form-control">
+                    <label>Empresa:</label>
+                      <select type="text" required name="empresas_id" class="form-control">
+                        <option value="" disabled selected>Selecionar</option>
+                        <?php foreach ($empresas as $empresa) : ?>
+                          <option value="<?= $empresa['id'] ?>"><?= $empresa['nome'] ?></option>
+                        <?php endforeach ?>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -225,22 +231,22 @@ $motoristas = listaMotoristas($conexao);
   </div>
 
 <!-- MODAL ALTERAR -->
-<div class="modal fade" id="modal-altera-motorista" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="modal-altera-produto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header modal-success">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Alterar Motorista</h4>
+          <h4 class="modal-title" id="myModalLabel">Alterar produto</h4>
         </div>
         <div class="modal-body">
-          <form action="altera-motorista.php" id="form-alterar" method="POST">
+          <form action="altera-produto.php" id="form-alterar" method="POST">
             <input type="hidden" name="id" class="altera-id"/>
             <div class="row">
               <div class="col-xs-12">
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="form-group mt-1">
-                      <label>Nome completo:</label>
+                      <label>Nome:</label>
                       <input type="text" required name="nome" class="form-control altera-nome">
                     </div>
                   </div>
@@ -249,8 +255,13 @@ $motoristas = listaMotoristas($conexao);
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="form-group">
-                      <label>CPF:</label>
-                      <input type="text" required name="cpf" class="form-control altera-cpf">
+                    <label>Empresa:</label>
+                      <select type="text" required name="empresas_id" class="form-control altera-empresa">
+                        <option value="" disabled selected>Selecionar</option>
+                        <?php foreach ($empresas as $empresa) : ?>
+                          <option value="<?= $empresa['id'] ?>"><?= $empresa['nome'] ?></option>
+                        <?php endforeach ?>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -272,10 +283,10 @@ $motoristas = listaMotoristas($conexao);
     <div class="modal-content">
       <div class="modal-header modal-danger">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Excluir motorista</h4>
+        <h4 class="modal-title" id="myModalLabel">Excluir produto</h4>
       </div>
       <div class="modal-body">
-        Deseja realmente exluir este motorista?
+        Deseja realmente exluir este produto?
       </div>
       <div class="modal-footer">
         <a type="button" class="btn btn-danger delete">Excluir</a>

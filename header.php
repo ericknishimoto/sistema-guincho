@@ -167,13 +167,12 @@
             <ul class="treeview-menu">
               <li><a href="cadastro-motoristas.php"><i class="fa fa-circle-o"></i> Motoristas</a></li>
               <li><a href="cadastro-empresas.php"><i class="fa fa-circle-o"></i> Empresas</a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> Produtos</a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> Serviços</a></li>
+              <li><a href="cadastro-produtos.php"><i class="fa fa-circle-o"></i> Produtos</a></li>
+              <li><a href="cadastro-servicos.php"><i class="fa fa-circle-o"></i> Serviços</a></li>
             </ul>
           </li>
-        <li><a href="usuarios.php"><i class="fa fa-users"></i> <span>Usuários</span></a></li>
-        <li><a href="empresas.php"><i class="fa fa-suitcase"></i> <span>Empresas</span></a></li>
         <li><a href="regras.php"><i class="fa fa-wrench"></i> <span>Regras</span></a></li>
+        <li><a href="usuarios.php"><i class="fa fa-users"></i> <span>Usuários</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
