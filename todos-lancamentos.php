@@ -38,7 +38,55 @@ $lancamentos = listaLancamentos($conexao);
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            Lançamento #<?=$_GET["id"] ?> cadastrado com sucesso!
+            O lançamento #<?=$_GET["id"] ?> foi cadastrado com sucesso!
+            </div>
+            <!-- /.box-body -->
+          </div>
+      </div>
+    </div>
+<?php
+  }
+?>
+
+<?php if(isset($_GET["alteracao"]) && $_GET["alteracao"]==true) {
+?>
+    <div class="row">
+      <div class="col-xs-6">
+      <div class="box box-success box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">Alterado</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            O lançamento #<?=$_GET["id"] ?> foi alterado com sucesso!
+            </div>
+            <!-- /.box-body -->
+          </div>
+      </div>
+    </div>
+<?php
+  }
+?>
+
+<?php if(isset($_GET["exclusao"]) && $_GET["exclusao"]==true) {
+?>
+    <div class="row">
+      <div class="col-xs-6">
+      <div class="box box-warning  box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">Excluído</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            O lançamento #<?=$_GET["id"] ?> foi excluído com sucesso!
             </div>
             <!-- /.box-body -->
           </div>
@@ -49,7 +97,9 @@ $lancamentos = listaLancamentos($conexao);
 ?>
     <div class="row">
       <div class="col-xs-7 col-md-3">
-        <a href="novo-lancamento.php" class="btn btn-block btn-success margin-bottom"><i class="fa fa-plus"></i><span> Adicionar lançamento</span></a>
+        <a href="form-novo-lancamento.php" class="btn btn-block btn-success margin-bottom">
+          <span>Novo Lançamento</span>
+        </a>
       </div>
     </div>
 
@@ -61,7 +111,7 @@ $lancamentos = listaLancamentos($conexao);
               <h3 class="box-title">Todos lançamentos</h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="box-body table-responsive">
               <table id="example1" class="table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
@@ -71,7 +121,7 @@ $lancamentos = listaLancamentos($conexao);
                   <th>Empresa</th>
                   <th>Produto</th>
                   <th>Serviço</th>
-                  <th>Ações</th>
+                  <th clas="text-center">Ações</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -81,17 +131,22 @@ $lancamentos = listaLancamentos($conexao);
                 $data = date('d-m-Y', strtotime(str_replace('-','/', $lancamento['data'])));
                 $data_convertida = str_replace('-','/', $data);
                 ?>
-                      <!-- utf8_encode() codifica a string para utf-8 -->
-                      <td><?= utf8_encode($lancamento['id']) ?></td>
-                      <td><?= utf8_encode($data_convertida) ?></td>
-                      <td><?= utf8_encode($lancamento['motorista_nome']) ?></td>
-                      <td><?= utf8_encode($lancamento['empresa_nome']) ?></td>
-                      <td><?= utf8_encode($lancamento['produto_nome']) ?></td>
-                      <td><?= utf8_encode($lancamento['servico_nome']) ?></td>
+                      <td class="text-center">
+                        <a href="lancamento.php?id=<?= $lancamento['id'] ?>">
+                          <p class="ordem"><?= $lancamento['id'] ?></p>
+                        </a>
+                      </td>
+                      <td><?= $data_convertida ?></td>
+                      <td><?= $lancamento['motorista_nome'] ?></td>
+                      <td><?= $lancamento['empresa_nome'] ?></td>
+                      <td><?= $lancamento['produto_nome'] ?></td>
+                      <td><?= $lancamento['servico_nome'] ?></td>
                       <td class="text-center">
                         <a href="lancamento.php?id=<?= $lancamento['id'] ?>" class="btn btn-default"><i class="fa fa-eye"></i></a>
-                        <a href="lancamento.php?id=<?= $lancamento['id'] ?>" class="btn btn-default"><i class="fa fa-pencil"></i></a>
-                        <a href="lancamento.php?id=<?= $lancamento['id'] ?>" class="btn btn-default"><i class="fa fa-trash-o"></i></a>
+                        <a href="form-altera-lancamento.php?id=<?= $lancamento['id'] ?>" class="btn btn-default"><i class="fa fa-pencil"></i></a>
+                        <a data-url="exclui-lancamento.php?id=" data-id="<?= $lancamento['id'] ?>" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete">
+                          <i class="fa fa-trash-o"></i>
+                        </a>
                       </td>
                   </tr>
 
@@ -107,6 +162,7 @@ $lancamentos = listaLancamentos($conexao);
                 <th>Empresa</th>
                 <th>Produto</th>
                 <th>Serviço</th>
+                <th class="text-center">Ações</th>
                 </tr>
                 </tfoot>
               </table>
@@ -122,6 +178,25 @@ $lancamentos = listaLancamentos($conexao);
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+<!-- MODAL -->
+<div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header modal-danger">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Excluir ordem</h4>
+      </div>
+      <div class="modal-body">
+        Deseja realmente exluir este lançamento?
+      </div>
+      <div class="modal-footer">
+        <a type="button" class="btn btn-danger delete">Excluir</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <?php
 require_once 'footer.php';

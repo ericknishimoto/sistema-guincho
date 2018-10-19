@@ -55,7 +55,7 @@ $servicos = listaServicos($conexao);
                       <select type="text" required name="motorista" class="form-control">
                         <option value="" disabled selected>Selecionar</option>
                         <?php foreach ($motoristas as $motorista) : ?>
-                        <option value="<?= $motorista['id'] ?>"><?= utf8_encode($motorista['nome']) ?></option>
+                        <option value="<?= $motorista['id'] ?>"><?= $motorista['nome'] ?></option>
                         <?php endforeach ?>
                       </select>
                     </div>
@@ -67,7 +67,7 @@ $servicos = listaServicos($conexao);
                       <select type="text" required name="empresa" class="form-control">
                         <option value="" disabled selected>Selecionar</option>
                         <?php foreach ($empresas as $empresa) : ?>
-                          <option value="<?= $empresa['id'] ?>"><?= utf8_encode($empresa['nome']) ?></option>
+                          <option value="<?= $empresa['id'] ?>"><?= $empresa['nome'] ?></option>
                         <?php endforeach ?>
                       </select>
                     </div>
@@ -79,7 +79,7 @@ $servicos = listaServicos($conexao);
                       <select type="text" required name="produto" class="form-control">
                       <option value="" disabled selected>Selecionar</option>
                         <?php foreach ($produtos as $produto) : ?>
-                          <option value="<?= $produto['id'] ?>"><?= utf8_encode($produto['nome']) ?></option>
+                          <option value="<?= $produto['id'] ?>"><?= $produto['nome'] ?></option>
                         <?php endforeach ?>
                       </select>
                     </div>
@@ -110,7 +110,7 @@ $servicos = listaServicos($conexao);
                       <select type="text" required name="servico" class="form-control">
                       <option value="" disabled selected>Selecionar</option>
                         <?php foreach ($servicos as $servico) : ?>
-                          <option value="<?= $servico['id'] ?>"><?= utf8_encode($servico['nome']) ?></option>
+                          <option value="<?= $servico['id'] ?>"><?= $servico['nome'] ?></option>
                         <?php endforeach ?>
                       </select>
                     </div>

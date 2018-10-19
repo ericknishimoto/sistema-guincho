@@ -1,6 +1,6 @@
 <?php foreach ($produtos as $produto) : ?>
 <?php if ($empresa['id'] == ($produto['empresas_id']) {?>
-    <option value="<?= $produto['id'] ?>"><?= utf8_encode($produto['nome']) ?></option>
+    <option value="<?= $produto['id'] ?>"><?= $produto['nome'] ?></option>
 <?php
 }
     ?>

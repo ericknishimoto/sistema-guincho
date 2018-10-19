@@ -41,8 +41,6 @@
 <!-- Mascaras -->
 <script src="dist/js/jquery.mask.min.js"></script>
 <script src="dist/js/mascaras.js"></script>
-
-
 <!-- DataTables -->
 <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -50,8 +48,44 @@
 <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="bower_components/fastclick/lib/fastclick.js"></script>
+
 <!-- page script -->
 <script>
+
+$('a[data-target="#modal-delete"]').on('click', function (e) { 
+    e.preventDefault();
+    var url = $(this).data('url');
+    var id = $(this).data('id');
+
+    $('.delete').attr('href', url + id);
+    $('#modal-delete').modal('show');
+    return false;
+});
+
+$('a[data-target="#modal-altera"]').on('click', function (e) { 
+    e.preventDefault();
+    var id = $(this).data('id');
+    var nome = $(this).data('nome');
+
+    $('.altera-id').val(id);
+    $('.altera-nome').val(nome);
+    $('#modal-altera').modal('show');
+    return false;
+});
+
+$('a[data-target="#modal-altera-motorista"]').on('click', function (e) { 
+    e.preventDefault();
+    var id = $(this).data('id');
+    var nome = $(this).data('nome');
+    var cpf = $(this).data('cpf');
+
+    $('.altera-id').val(id);
+    $('.altera-nome').val(nome);
+    $('.altera-cpf').val(cpf);
+    $('#modal-altera-motorista').modal('show');
+    return false;
+});
+
   $(function () {
     $('#example1').DataTable()
     $('#example2').DataTable({
@@ -60,7 +94,16 @@
       'searching'   : false,
       'ordering'    : true,
       'info'        : true,
-      'autoWidth'   : false
+      'autoWidth'   : true,
+      'responsive'  : true
+    })
+  })
+
+    $(function () {
+    $('#tabela').DataTable({
+      'paging'      : false,
+      'lengthMenu'  : false,
+      'responsive'  : true
     })
   })
 

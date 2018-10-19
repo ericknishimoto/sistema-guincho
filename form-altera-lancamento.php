@@ -4,7 +4,11 @@ require_once 'conecta.php';
 require_once 'banco.php';
 
 $id = $_GET["id"];
-$lancamentos = listaLancamento($conexao, $id);
+$lancamento = listaLancamento($conexao, $id);
+$motoristas = listaMotoristas($conexao);
+$empresas = listaEmpresas($conexao);
+$produtos = listaProdutos($conexao);
+$servicos = listaServicos($conexao);
 
 ?>
  <!-- Content Wrapper. Contains page content -->
@@ -12,8 +16,8 @@ $lancamentos = listaLancamento($conexao, $id);
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Ordem #<?= ($lancamentos['id']) ?>
-        <small>veja todas as informações desta ordem</small>
+        Alterar Ordem #<?= ($lancamento['id']) ?>
+        <small>altere os dados desta ordem</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -24,7 +28,8 @@ $lancamentos = listaLancamento($conexao, $id);
 
     <!-- Main content -->
     <section class="content">
-      <form action="adiciona-lancamento.php" method="POST">
+      <form action="altera-lancamento.php" method="POST">
+      <input type="hidden" name="id" value="<?=$lancamento['id']?>" />
         <div class="row">
           <div class="col-xs-12">
             <div class="box box-primary">
@@ -42,7 +47,7 @@ $lancamentos = listaLancamento($conexao, $id);
                         <div class="input-group-addon">
                           <i class="fa fa-calendar"></i>
                         </div>
-                        <input disabled value="<?= date("d-m-Y",strtotime(str_replace('/','-',($lancamentos['data'])))); ?>" type="text" required name="data" class="form-control pull-right" id="datepicker">
+                        <input value="<?= date("d-m-Y",strtotime(str_replace('/','-',($lancamento['data'])))); ?>" type="text" required name="data" class="form-control pull-right" id="datepicker">
                       </div>
                     </div>
                   </div>
@@ -50,8 +55,15 @@ $lancamentos = listaLancamento($conexao, $id);
                   <div class="col-md-2">
                     <div class="form-group">
                       <label>Motorista:</label>
-                      <select disabled type="text" required name="motorista" class="form-control">
-                        <option disabled value="" selected><?= ($lancamentos['motorista_nome']) ?></option>
+                      <select type="text" required name="motorista" class="form-control">
+                        <?php foreach ($motoristas as $motorista) :
+                          $valida = $motorista['id'] == $lancamento['motoristas_id'];
+                          $selecao = $valida ? "selected='selected'" : "";
+                          ?>
+                        <option value="<?= $motorista['id'] ?>" <?=$selecao?>>
+                        <?= $motorista['nome'] ?>
+                        </option>
+                        <?php endforeach ?>
                       </select>
                     </div>
                   </div>
@@ -59,8 +71,15 @@ $lancamentos = listaLancamento($conexao, $id);
                   <div class="col-md-2">
                     <div class="form-group">
                       <label>Empresa:</label>
-                      <select disabled type="text" required name="empresa" class="form-control">
-                      <option disabled value="" selected><?= $lancamentos['empresa_nome'] ?></option>
+                      <select type="text" required name="empresa" class="form-control">
+                        <?php foreach ($empresas as $empresa) :
+                            $valida = $empresa['id'] == $lancamento['empresas_id'];
+                            $selecao = $valida ? "selected='selected'" : "";
+                            ?>
+                          <option value="<?= $empresa['id'] ?>" <?=$selecao?>>
+                          <?= $empresa['nome'] ?>
+                          </option>
+                          <?php endforeach ?>
                       </select>
                     </div>
                   </div>
@@ -68,8 +87,15 @@ $lancamentos = listaLancamento($conexao, $id);
                   <div class="col-md-2">                      
                     <div class="form-group">
                       <label>Produto:</label>
-                      <select disabled type="text" required name="produto" class="form-control">
-                      <option disabled value="" selected><?= $lancamentos['produto_nome'] ?></option>
+                      <select type="text" required name="produto" class="form-control">
+                        <?php foreach ($produtos as $produto) :
+                            $valida = $produto['id'] == $lancamento['produtos_id'];
+                            $selecao = $valida ? "selected='selected'" : "";
+                            ?>
+                          <option value="<?= $produto['id'] ?>" <?=$selecao?>>
+                          <?= $produto['nome'] ?>
+                          </option>
+                          <?php endforeach ?>
                       </select>
                     </div>
                   </div>
@@ -77,14 +103,14 @@ $lancamentos = listaLancamento($conexao, $id);
                   <div class="col-md-2">
                     <div class="form-group">
                       <label>Workorder:</label>
-                      <input disabled value="<?= ($lancamentos['workorder']) ?>" type="text" name="workorder" class="form-control">
+                      <input value="<?= ($lancamento['workorder']) ?>" type="text" name="workorder" class="form-control">
                     </div>
                   </div>
 
                   <div class="col-md-2">
                     <div class="form-group">
                       <label>Ref. Externa:</label>
-                      <input disabled value="<?= ($lancamentos['ref_externa']) ?>" type="text" name="ref_externa" class="form-control">
+                      <input value="<?= ($lancamento['ref_externa']) ?>" type="text" name="ref_externa" class="form-control">
                     </div>
                   </div>
 
@@ -96,8 +122,15 @@ $lancamentos = listaLancamento($conexao, $id);
                 <div class="col-md-2">                      
                     <div class="form-group">
                       <label>Serviço:</label>
-                      <select disabled type="text" required name="servico" class="form-control">
-                      <option disabled value="" selected><?= $lancamentos['servico_nome'] ?></option>
+                      <select type="text" required name="servico" class="form-control">
+                        <?php foreach ($servicos as $servico) :
+                            $valida = $servico['id'] == $lancamento['servicos_id'];
+                            $selecao = $valida ? "selected='selected'" : "";
+                            ?>
+                          <option value="<?= $servico['id'] ?>" <?=$selecao?>>
+                          <?= $servico['nome'] ?>
+                          </option>
+                          <?php endforeach ?>
                       </select>
                     </div>
                   </div>
@@ -105,32 +138,32 @@ $lancamentos = listaLancamento($conexao, $id);
                   <div class="col-md-2">
                     <div class="form-group">
                       <label>Veículo:</label>
-                      <input disabled value="<?= $lancamentos['veiculo'] ?>" type="text" required  name="veiculo" class="form-control">
+                      <input value="<?= $lancamento['veiculo'] ?>" type="text" required  name="veiculo" class="form-control">
                     </div>
                   </div>
                   <div class="col-md-2">
                     <div class="form-group">
                       <label>Placa:</label>
-                      <input id="placa"  disabled value="<?= ($lancamentos['placa']) ?>" type="text" name="placa" class="form-control placaCarro">
+                      <input id="placa"  value="<?= ($lancamento['placa']) ?>" type="text" name="placa" class="form-control placaCarro">
                     </div>
                   </div>
                   <div class="col-md-2">
                     <div class="form-group">
                       <label>KM Totais:</label>
-                      <input  disabled value="<?= ($lancamentos['km_total']) ?>" type="number" required name="km_total" class="form-control">
+                      <input  value="<?= ($lancamento['km_total']) ?>" type="number" required name="km_total" class="form-control">
                     </div>
                   </div>
                   <div class="col-md-2">
                     <div class="form-group input-symbol-real">
                       <label>Pedágio:</label>
                       <!-- Input number com casa decimal -->
-                        <input  disabled value="<?= ($lancamentos['pedagio']) ?>" type="number" required name="pedagio" class="form-control" name="price" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$"">
+                        <input  value="<?= ($lancamento['pedagio']) ?>" type="number" required name="pedagio" class="form-control" name="price" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$"">
                     </div>
                   </div>
                   <div class="col-md-2">
                     <div class="form-group">
                       <label>Extras:</label>
-                      <input  disabled value="<?= $lancamentos['extras'] ?>" type="text" name="extras" class="form-control">
+                      <input  value="<?= $lancamento['extras'] ?>" type="text" name="extras" class="form-control">
                     </div>
                   </div>
                 </div>
@@ -145,7 +178,7 @@ $lancamentos = listaLancamento($conexao, $id);
                   <div class="col-xs-12">
                     <div class="form-group mt-1">
                       <label>Origem:</label>
-                      <input  disabled value="<?= $lancamentos['origem'] ?>" type="text" required name="origem" class="form-control">
+                      <input  value="<?= $lancamento['origem'] ?>" type="text" required name="origem" class="form-control">
                     </div>
                   </div>
                 </div>
@@ -155,7 +188,7 @@ $lancamentos = listaLancamento($conexao, $id);
                   <div class="col-xs-12">
                     <div class="form-group">
                       <label>Destino:</label>
-                      <input  disabled value="<?= $lancamentos['destino'] ?>" type="text" required name="destino" class="form-control">
+                      <input  value="<?= $lancamento['destino'] ?>" type="text" required name="destino" class="form-control">
                     </div>
                   </div>
                 </div>
@@ -165,13 +198,13 @@ $lancamentos = listaLancamento($conexao, $id);
                   <div class="col-xs-6">
                     <div class="form-group input-symbol-real">
                       <label>Total:</label>
-                      <input  disabled value="<?= ($lancamentos['val_total']) ?>" type="number" required name="val_total" class="form-control" name="price" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$">
+                      <input  value="<?= ($lancamento['val_total']) ?>" type="number" required name="val_total" class="form-control" name="price" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$">
                     </div>
                   </div>
                   <div class="col-xs-6">
                     <div class="form-group input-symbol-real">
                       <label>Total Empresa:</label>
-                      <input  disabled value="<?= ($lancamentos['val_total_empresa']) ?>" type="number" required name="val_total_empresa" class="form-control" name="price" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$">
+                      <input  value="<?= ($lancamento['val_total_empresa']) ?>" type="number" required name="val_total_empresa" class="form-control" name="price" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$">
                     </div>
                   </div>
                 </div>
@@ -181,7 +214,7 @@ $lancamentos = listaLancamento($conexao, $id);
                   <div class="col-xs-12">
                     <div class="form-group">
                       <label>Observações</label>
-                      <textarea  disabled class="form-control" rows="2" name="obs"><?= $lancamentos['obs'] ?></textarea>
+                      <textarea  class="form-control" rows="2" name="obs"><?= $lancamento['obs'] ?></textarea>
                     </div>
                   </div>
                 </div>
@@ -196,7 +229,7 @@ $lancamentos = listaLancamento($conexao, $id);
         <!-- /.row -->
         <div class="row">
             <div class="center-block text-center">
-              <a href="form-altera-lancamento.php?id=<?= $lancamentos['id'] ?>" class="btn btn-success margin-bottom margin">Alterar</a>
+              <input type="submit" class="btn btn-success margin-bottom margin" value="Alterar">
               <a href="todos-lancamentos.php" class="btn btn-default margin-bottom margin">Voltar</a>
             </div>
           </div>

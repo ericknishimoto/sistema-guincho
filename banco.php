@@ -1,4 +1,5 @@
 <?php
+
 function listaEmpresas($conexao)
 {
     $empresas = array();
@@ -10,6 +11,31 @@ function listaEmpresas($conexao)
     return $empresas;
 }
 
+
+function insereEmpresa($conexao,$nome)
+    { 
+    $query = "INSERT INTO empresas (nome)
+    VALUES ('{$nome}') "; 
+
+    return mysqli_query($conexao, $query);
+}
+
+function alteraEmpresa($conexao,$id,$nome)
+    { 
+    $query = "UPDATE empresas set
+    nome = '{$nome}'
+    
+    where id = '{$id}'
+    ";
+
+    return mysqli_query($conexao, $query);
+    }
+
+function excluiEmpresa($conexao, $id) {
+    $query = "delete from empresas where id = {$id}";
+    return mysqli_query($conexao, $query);
+}
+
 function listaMotoristas($conexao)
 {
     $motoristas = array();
@@ -19,6 +45,31 @@ function listaMotoristas($conexao)
         array_push($motoristas, $motorista);
     }
     return $motoristas;
+}
+
+function insereMotorista ($conexao,$nome,$cpf)
+    { 
+    $query = "INSERT INTO motoristas (nome, cpf)
+    VALUES ('{$nome}','{$cpf}')"; 
+
+    return mysqli_query($conexao, $query);
+}
+
+function alteraMotorista ($conexao,$id,$nome,$cpf)
+    { 
+    $query = "UPDATE motoristas set
+    nome = '{$nome}',
+    cpf= '{$cpf}'
+    
+    where id = '{$id}'
+    ";
+
+    return mysqli_query($conexao, $query);
+    }
+
+function excluiMotorista($conexao, $id) {
+    $query = "delete from motoristas where id = {$id}";
+    return mysqli_query($conexao, $query);
 }
 
 function listaProdutos($conexao)
@@ -79,7 +130,6 @@ function listaLancamentos($conexao)
 
 function listaLancamento($conexao, $id)
 {
-  $lancamentos = array();
   $resultado = mysqli_query($conexao, "
   select
   l.id as id,
@@ -89,6 +139,10 @@ function listaLancamento($conexao, $id)
   p.nome as produto_nome,
   s.nome as servico_nome,
   
+  l.motoristas_id,
+  l.empresas_id,
+  l.produtos_id,
+  l.servicos_id,
   workorder,
   ref_externa,
   veiculo,
@@ -124,18 +178,48 @@ function listaLancamento($conexao, $id)
 
   ");
 
-  while ($lancamento = mysqli_fetch_assoc($resultado)) {
-    array_push($lancamentos, $lancamento);
-  }
-  return $lancamentos;
+  return mysqli_fetch_assoc($resultado);
 }
 
 function insereLancamento ($conexao,$date_for_database,$motorista,$empresa,$produto,$servico,$workorder,
-      $ref_externa,$veiculo,$placa,$km_total,$pedagio_decimal,$extras,$origem,$destino,$val_total,$val_total_empresa,$obs)
-      { 
-        $query = "INSERT INTO lancamentos (data,motoristas_id, empresas_id, produtos_id, servicos_id, workorder, ref_externa, veiculo, placa, km_total, pedagio, extras, origem, destino, val_total, val_total_empresa, obs)
-        VALUES ('{$date_for_database}','{$motorista}','{$empresa}','{$produto}','{$servico}','{$workorder}',
-        '{$ref_externa}','{$veiculo}','{$placa}','{$km_total}','{$pedagio_decimal}','{$extras}','{$origem}','{$destino}','{$val_total}','{$val_total_empresa}','{$obs}')"; 
-        $resultadoDaInserção = mysqli_query($conexao, $query);
-        return $resultadoDaInserção;
-      }
+    $ref_externa,$veiculo,$placa,$km_total,$pedagio_decimal,$extras,$origem,$destino,$val_total,$val_total_empresa,$obs)
+    { 
+    $query = "INSERT INTO lancamentos (data,motoristas_id, empresas_id, produtos_id, servicos_id, workorder, ref_externa, veiculo, placa, km_total, pedagio, extras, origem, destino, val_total, val_total_empresa, obs)
+    VALUES ('{$date_for_database}','{$motorista}','{$empresa}','{$produto}','{$servico}','{$workorder}',
+    '{$ref_externa}','{$veiculo}','{$placa}','{$km_total}','{$pedagio_decimal}','{$extras}','{$origem}','{$destino}','{$val_total}','{$val_total_empresa}','{$obs}')"; 
+
+    return mysqli_query($conexao, $query);
+}
+
+function alteraLancamento ($conexao,$id,$date_for_database,$motorista,$empresa,$produto,$servico,$workorder,
+    $ref_externa,$veiculo,$placa,$km_total,$pedagio_decimal,$extras,$origem,$destino,$val_total,$val_total_empresa,$obs)
+    { 
+    $query = "UPDATE lancamentos set
+    data = '{$date_for_database}',
+    motoristas_id = '{$motorista}',
+    empresas_id = '{$empresa}',
+    produtos_id = '{$produto}',
+    servicos_id = '{$servico}',
+    workorder = '{$workorder}',
+    ref_externa = '{$ref_externa}',
+    veiculo = '{$veiculo}',
+    placa = '{$placa}',
+    km_total = '{$km_total}',
+    pedagio = '{$pedagio_decimal}',
+    extras = '{$extras}',
+    origem = '{$origem}',
+    destino = '{$destino}',
+    val_total = '{$val_total}',
+    val_total_empresa = '{$val_total_empresa}',
+    obs = '{$obs}'
+    
+    where id = '{$id}'
+    ";
+
+    return mysqli_query($conexao, $query);
+    }
+
+function excluiLancamento($conexao, $id) {
+    $query = "delete from lancamentos where id = {$id}";
+    return mysqli_query($conexao, $query);
+}
