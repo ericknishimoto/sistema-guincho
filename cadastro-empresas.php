@@ -28,7 +28,7 @@ $empresas = listaEmpresas($conexao);
 <?php if(isset($_GET["cadastro"]) && $_GET["cadastro"]==true) {
 ?>
     <div class="row">
-      <div class="col-xs-6">
+      <div class="col-xs-8">
       <div class="box box-success box-solid">
             <div class="box-header with-border">
               <h3 class="box-title">Cadastrado</h3>
@@ -52,7 +52,7 @@ $empresas = listaEmpresas($conexao);
 <?php if(isset($_GET["alteracao"]) && $_GET["alteracao"]==true) {
 ?>
     <div class="row">
-      <div class="col-xs-6">
+      <div class="col-xs-8">
       <div class="box box-success box-solid">
             <div class="box-header with-border">
               <h3 class="box-title">Alterado</h3>
@@ -76,7 +76,7 @@ $empresas = listaEmpresas($conexao);
 <?php if(isset($_GET["exclusao"]) && $_GET["exclusao"]==true) {
 ?>
     <div class="row">
-      <div class="col-xs-6">
+      <div class="col-xs-8">
       <div class="box box-success  box-solid">
             <div class="box-header with-border">
               <h3 class="box-title">Excluído</h3>
@@ -100,7 +100,7 @@ $empresas = listaEmpresas($conexao);
 <?php if(isset($_GET["erro"]) && $_GET["erro"]==1451) {
   ?>
       <div class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-8">
         <div class="box box-danger  box-solid">
               <div class="box-header with-border">
                 <h3 class="box-title">ALERTA</h3>

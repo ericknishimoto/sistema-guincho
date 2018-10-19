@@ -195,13 +195,13 @@ $servicos = listaServicos($conexao);
                 <!-- /.row -->
                 <!-- .row -->
                 <div class="row">
-                  <div class="col-xs-6">
+                  <div class="col-xs-8">
                     <div class="form-group input-symbol-real">
                       <label>Total:</label>
                       <input  value="<?= ($lancamento['val_total']) ?>" type="number" required name="val_total" class="form-control" name="price" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$">
                     </div>
                   </div>
-                  <div class="col-xs-6">
+                  <div class="col-xs-8">
                     <div class="form-group input-symbol-real">
                       <label>Total Empresa:</label>
                       <input  value="<?= ($lancamento['val_total_empresa']) ?>" type="number" required name="val_total_empresa" class="form-control" name="price" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$">

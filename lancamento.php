@@ -162,13 +162,13 @@ $lancamentos = listaLancamento($conexao, $id);
                 <!-- /.row -->
                 <!-- .row -->
                 <div class="row">
-                  <div class="col-xs-6">
+                  <div class="col-xs-8">
                     <div class="form-group input-symbol-real">
                       <label>Total:</label>
                       <input  disabled value="<?= ($lancamentos['val_total']) ?>" type="number" required name="val_total" class="form-control" name="price" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$">
                     </div>
                   </div>
-                  <div class="col-xs-6">
+                  <div class="col-xs-8">
                     <div class="form-group input-symbol-real">
                       <label>Total Empresa:</label>
                       <input  disabled value="<?= ($lancamentos['val_total_empresa']) ?>" type="number" required name="val_total_empresa" class="form-control" name="price" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$">
