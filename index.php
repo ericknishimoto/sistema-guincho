@@ -116,13 +116,13 @@ require_once 'header.php';
                 </div>
               </div>
               <div class="box-body">
-                  <div id="columnchart_values" class="grafico"></div>
+                  <div id="top_x_div" class="grafico"></div>
               </div>
               <!-- /.box-body -->
             </div>
           </div>
       </div>
-      
+
     </section>
     <!-- /.content -->
   </div>
@@ -156,33 +156,37 @@ require_once 'header.php';
 
 <!-- GRAFICO COLUMN-->
 <script type="text/javascript">
-  google.charts.load("current", {packages:['corechart']});
-  google.charts.setOnLoadCallback(drawChart);
-  function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-      ["Element", "Density", { role: "style" } ],
-      ["Copper", 8.94, "#b87333"],
-      ["Silver", 10.49, "silver"],
-      ["Gold", 19.30, "gold"],
-      ["Platinum", 21.45, "color: #e5e4e2"]
+  google.charts.load('current', {'packages':['bar']});
+  google.charts.setOnLoadCallback(drawStuff);
+
+  function drawStuff() {
+    var data = new google.visualization.arrayToDataTable([
+      ['Move', 'Percentage'],
+      ["King's pawn (e4)", 44,],
+      ["Queen's pawn (d4)", 31],
+      ["Knight to King 3 (Nf3)", 12],
+      ["Queen's bishop pawn (c4)", 10],
+      ['Other', 3]
     ]);
 
-    var view = new google.visualization.DataView(data);
-    view.setColumns([0, 1,
-                     { calc: "stringify",
-                       sourceColumn: 1,
-                       type: "string",
-                       role: "annotation" },
-                     2]);
-
     var options = {
-      title: "Density of Precious Metals, in g/cm^3",
-      bar: {groupWidth: "95%"},
-      legend: { position: "none" },
+      displayAnnotations: true,
+      legend: { position: 'none' },
+      chart: {
+        title: 'Chess opening moves',
+        subtitle: 'popularity by percentage' },
+      axes: {
+        x: {
+          0: { side: 'top', label: 'White to move'} // Top x-axis.
+        }
+      },
+      bar: { groupWidth: "90%" }
     };
-    var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
-    chart.draw(view, options);
-}
+
+    var chart = new google.charts.Bar(document.getElementById('top_x_div'));
+    // Convert the Classic options to Material options.
+    chart.draw(data, google.charts.Bar.convertOptions(options));
+  };
 </script>
 
 <?php
