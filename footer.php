@@ -15,9 +15,8 @@
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- Morris.js charts -->
-<script src="bower_components/raphael/raphael.min.js"></script>
-<script src="bower_components/morris.js/morris.min.js"></script>
+<!-- MChartJs
+<script src="bower_components/chart.js/Chart.js"></script> -->
 <!-- Sparkline -->
 <script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
@@ -50,8 +49,8 @@
 <script src="bower_components/fastclick/lib/fastclick.js"></script>
 
 <!-- page script -->
+<!-- MODAL E DATEPICKER -->
 <script>
-
   $('a[data-target="#modal-delete"]').on('click', function (e) { 
       e.preventDefault();
       var url = $(this).data('url');
@@ -130,59 +129,61 @@
         orientation: "left",
       })
 </script>
+<!-- VALORES TODOS LANCAMENTOS -->
 <script>
-$(document).ready(function(){
+  $(document).ready(function(){
 
-    let valTotal = document.querySelectorAll("#val_total"); //Seleciona todas as ID ##val_total e captura o valor.
-    let somaValTotal = 0;
+      let valTotal = document.querySelectorAll("#val_total"); //Seleciona todas as ID ##val_total e captura o valor.
+      let somaValTotal = 0;
 
-    let valTotalEmpresa = document.querySelectorAll("#val_total_empresa"); //Seleciona todas as ID ##val_total e captura o valor.
-    let somaValTotalEmpresa = 0;
+      let valTotalEmpresa = document.querySelectorAll("#val_total_empresa"); //Seleciona todas as ID ##val_total e captura o valor.
+      let somaValTotalEmpresa = 0;
 
-    for (var i = 0; i < valTotal.length; i++ ){
-      valor = parseFloat(valTotal[i].value);
-      somaValTotal =  somaValTotal + valor
+      for (var i = 0; i < valTotal.length; i++ ){
+        valor = parseFloat(valTotal[i].value);
+        somaValTotal =  somaValTotal + valor
 
-      var thValTotal = document.querySelector("#somaValTotal");
-      thValTotal.innerHTML = "R$" + parseFloat(somaValTotal).toFixed(2);
+        var thValTotal = document.querySelector("#somaValTotal");
+        thValTotal.innerHTML = "R$" + parseFloat(somaValTotal).toFixed(2);
 
-    }
+      }
 
-    for (var i = 0; i < valTotalEmpresa.length; i++ ){
-      valor = parseFloat(valTotalEmpresa[i].value);
-      somaValTotalEmpresa =  somaValTotalEmpresa + valor
-  
-      var thValTotalEmpresa = document.querySelector("#somaValTotalEmpresa");
-      thValTotalEmpresa.innerHTML = "R$" + parseFloat(somaValTotalEmpresa).toFixed(2);
-    }
+      for (var i = 0; i < valTotalEmpresa.length; i++ ){
+        valor = parseFloat(valTotalEmpresa[i].value);
+        somaValTotalEmpresa =  somaValTotalEmpresa + valor
+    
+        var thValTotalEmpresa = document.querySelector("#somaValTotalEmpresa");
+        thValTotalEmpresa.innerHTML = "R$" + parseFloat(somaValTotalEmpresa).toFixed(2);
+      }
 
-  var campoFiltro = document.querySelector("[type=search]");
-  campoFiltro.addEventListener("input", function(){ //input: escuta o input de dados;
-    let valTotal = document.querySelectorAll("#val_total"); //Seleciona todas as ID ##val_total e captura o valor.
-    let somaValTotal = 0;
+    var campoFiltro = document.querySelector("[type=search]");
+    campoFiltro.addEventListener("input", function(){ //input: escuta o input de dados;
+      let valTotal = document.querySelectorAll("#val_total"); //Seleciona todas as ID ##val_total e captura o valor.
+      let somaValTotal = 0;
 
-    let valTotalEmpresa = document.querySelectorAll("#val_total_empresa"); //Seleciona todas as ID ##val_total e captura o valor.
-    let somaValTotalEmpresa = 0;
+      let valTotalEmpresa = document.querySelectorAll("#val_total_empresa"); //Seleciona todas as ID ##val_total e captura o valor.
+      let somaValTotalEmpresa = 0;
 
-    for (var i = 0; i < valTotal.length; i++ ){
-      valor = parseFloat(valTotal[i].value);
-      somaValTotal =  somaValTotal + valor
+      for (var i = 0; i < valTotal.length; i++ ){
+        valor = parseFloat(valTotal[i].value);
+        somaValTotal =  somaValTotal + valor
 
-      var thValTotal = document.querySelector("#somaValTotal");
-      thValTotal.innerHTML = "R$" + parseFloat(somaValTotal).toFixed(2);
+        var thValTotal = document.querySelector("#somaValTotal");
+        thValTotal.innerHTML = "R$" + parseFloat(somaValTotal).toFixed(2);
 
-    }
+      }
 
-    for (var i = 0; i < valTotalEmpresa.length; i++ ){
-      valor = parseFloat(valTotalEmpresa[i].value);
-      somaValTotalEmpresa =  somaValTotalEmpresa + valor
-  
-      var thValTotalEmpresa = document.querySelector("#somaValTotalEmpresa");
-      thValTotalEmpresa.innerHTML = "R$" + parseFloat(somaValTotalEmpresa).toFixed(2);
-    }
-  
-  })
-});
+      for (var i = 0; i < valTotalEmpresa.length; i++ ){
+        valor = parseFloat(valTotalEmpresa[i].value);
+        somaValTotalEmpresa =  somaValTotalEmpresa + valor
+    
+        var thValTotalEmpresa = document.querySelector("#somaValTotalEmpresa");
+        thValTotalEmpresa.innerHTML = "R$" + parseFloat(somaValTotalEmpresa).toFixed(2);
+      }
+    
+    })
+  });
 </script>
+
 </body>
 </html>
