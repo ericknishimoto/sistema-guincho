@@ -66,49 +66,14 @@
         <ul class="nav navbar-nav">
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+            <a href="cadastro-usuarios.php">
+              <img src="dist/img/user.png" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?= $_SESSION["usuario_nome"] ?></span>
             </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
-                </p>
-              </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                </div>
-              </li>
-            </ul>
           </li>
           <!-- Control Sidebar Toggle Button -->
           <li>
-            <a href="#" data-toggle="control-sidebar">Sair</i></a>
+            <a href="logout.php">Sair</i></a>
           </li>
         </ul>
       </div>
@@ -121,38 +86,38 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="dist/img/user.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Administrador</p>
-        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          <p><?= $_SESSION["usuario_nome"] ?></p>
+       <i class="fa fa-circle text-success"></i> <span class="h6">Online</span>
         </div>
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">PRINCIPAL</li>
         <li>
-          <a href="/">
+          <a href="dashboard.php">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
         <li>
           <a href="todos-lancamentos.php">
             <i class="fa fa-list"></i> <span>Lançamentos</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-green">new</small>
-            </span>
           </a>
         </li>     
         <li>
-          <a href="relatorios.php">
+          <a href="#">
             <i class="fa fa-line-chart"></i> <span>Relatórios</span>
+            <span class="pull-right-container">
+              <small class="label pull-right bg-gray">Off</small>
+            </span>
           </a>
         </li>
         <li class="header">CONFIGURAÇÕES</li>
         <li class="treeview">
             <a href="#">
-              <i class="fa fa fa-edit"></i> <span>Cadastros</span>
+              <i class="fa fa fa-edit"></i> <span>Cadastros Gerais</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -164,8 +129,14 @@
               <li><a href="cadastro-servicos.php"><i class="fa fa-circle-o"></i> Serviços</a></li>
             </ul>
           </li>
-        <li><a href="regras.php"><i class="fa fa-wrench"></i> <span>Regras</span></a></li>
-        <li><a href="usuarios.php"><i class="fa fa-users"></i> <span>Usuários</span></a></li>
+        <li><a href="cadastro-usuarios.php"><i class="fa fa-users"></i> <span>Usuários</span></a></li>
+        <li><a href="#.php">
+        <i class="fa fa-wrench"></i> <span>Regras</span>
+        <span class="pull-right-container">
+              <small class="label pull-right bg-gray">Off</small>
+        </span>
+        </a></li>
+        
       </ul>
     </section>
     <!-- /.sidebar -->

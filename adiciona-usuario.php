@@ -24,21 +24,26 @@ require_once 'banco.php';
     
       <?php 
       
-      $id = $_POST["id"];
       $nome = $_POST["nome"];
-      $empresas_id = $_POST["empresas_id"];
- 
+      $email = $_POST["email"];
+      $password1 = md5($_POST["password1"]);
+      $password2 = md5($_POST["password2"]);
       
-      if(alteraProduto($conexao,$id,$nome,$empresas_id))
-      {
-        header ("Location: cadastro-produtos.php?alteracao=true");
-        die();
-      }else{ 
-      ?>
-        <h1>Algo deu errado:</h1>
-        <?php
-          printf("Connect failed: %s\n", mysqli_error($conexao));
-        exit();
+      if ($password1 == $password2) {
+
+        if(insereUsuario($conexao,$nome,$email,$password1))
+        {
+          header ("Location: cadastro-usuarios.php?cadastro=true");
+          die();
+        }else{ 
+        ?>
+          <h1>Algo deu errado:</h1>
+          <?php
+            printf("Connect failed: %s\n", mysqli_error($conexao));
+          exit();
+        }
+      } elseif ($password1 != $password2) {
+        header ("Location: cadastro-usuarios.php?senha=true");
       }
       ?>
 

@@ -5,7 +5,7 @@ require_once 'header.php';
 require_once 'conecta.php';
 require_once 'banco.php';
 
-$lancamentos = listaLancamentos($conexao);
+$usuarios = listaUsuarios($conexao);
 
 ?>
 
@@ -14,12 +14,13 @@ $lancamentos = listaLancamentos($conexao);
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Lançamentos
-        <small>veja todos os lançamentos</small>
+        Usuários
+        <small>cadastro de usuários</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Lançamentos</li>
+        <li>Cadastros</li>
+        <li class="active">Usuários</li>
       </ol>
     </section>
 
@@ -40,7 +41,7 @@ $lancamentos = listaLancamentos($conexao);
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            O lançamento #<?=$_GET["id"] ?> foi cadastrado com sucesso!
+            O usuário foi cadastrada com sucesso!
             </div>
             <!-- /.box-body -->
           </div>
@@ -64,7 +65,7 @@ $lancamentos = listaLancamentos($conexao);
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            O lançamento #<?=$_GET["id"] ?> foi alterado com sucesso!
+            O usuário foi alterado com sucesso!
             </div>
             <!-- /.box-body -->
           </div>
@@ -78,7 +79,7 @@ $lancamentos = listaLancamentos($conexao);
 ?>
     <div class="row">
       <div class="col-xs-8">
-      <div class="box box-warning  box-solid">
+      <div class="box box-success  box-solid">
             <div class="box-header with-border">
               <h3 class="box-title">Excluído</h3>
               <div class="box-tools pull-right">
@@ -88,7 +89,7 @@ $lancamentos = listaLancamentos($conexao);
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            O lançamento #<?=$_GET["id"] ?> foi excluído com sucesso!
+            O usuário foi excluído com sucesso!
             </div>
             <!-- /.box-body -->
           </div>
@@ -97,11 +98,35 @@ $lancamentos = listaLancamentos($conexao);
 <?php
   }
 ?>
+
+<?php if(isset($_GET["senha"]) && $_GET["senha"]==true) {
+  ?>
+      <div class="row">
+        <div class="col-xs-8">
+        <div class="box box-danger  box-solid">
+              <div class="box-header with-border">
+                <h3 class="box-title">ALERTA</h3>
+                <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+                <!-- /.box-tools -->
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body">
+              Senhas não conferem, tente novamente.
+              </div>
+              <!-- /.box-body -->
+            </div>
+        </div>
+      </div>
+  <?php
+    }
+  ?>
     <div class="row">
       <div class="col-xs-7 col-md-3">
-        <a href="form-novo-lancamento.php" class="btn btn-block btn-success margin-bottom">
-          <span>Novo Lançamento</span>
-        </a>
+        <button type="button" class="btn btn-success margin-bottom" data-toggle="modal" data-target="#modal-novo">
+            <span>Novo Usuário</span>
+          </button>
       </div>
     </div>
 
@@ -110,51 +135,29 @@ $lancamentos = listaLancamentos($conexao);
 
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Todos lançamentos</h3>
+              <h3 class="box-title">Todos usuários</h3>
             </div>
             <!-- /.box-header -->
+            <!-- TABLE -->
             <div class="box-body table-responsive">
-              <table id="example1" class="table table-bordered table-striped table-hover">
+              <table id="tabela" class="table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
-                  <th>#Ordem</th>
-                  <th>Data</th>
-                  <th>Motorista</th>
-                  <th>Empresa</th>
-                  <th>Produto</th>
-                  <th>Serviço</th>
-                  <th>Total</th>
-                  <th>Total Empresa</th>
-                  <th clas="text-center">Ações</th>
+                  <th>Nome</th>
+                  <th>Email</th>
+                  <th class="text-center">Ações</th>
                 </tr>
                 </thead>
                 <tbody>
 
                 <?php
-                foreach ($lancamentos as $lancamento) {
-                $data = date('d-m-Y', strtotime(str_replace('-','/', $lancamento['data'])));
-                $data_convertida = str_replace('-','/', $data);
+                foreach ($usuarios as $usuario) {
                 ?>
+
+                      <td><?= $usuario['nome'] ?></td>
+                      <td><?= $usuario['email'] ?></td>
                       <td class="text-center">
-                        <a href="lancamento.php?id=<?= $lancamento['id'] ?>">
-                          <p class="ordem"><?= $lancamento['id'] ?></p>
-                        </a>
-                      </td>
-                      <td><?= $data_convertida ?></td>
-                      <td><?= $lancamento['motorista_nome'] ?></td>
-                      <td><?= $lancamento['empresa_nome'] ?></td>
-                      <td><?= $lancamento['produto_nome'] ?></td>
-                      <td><?= $lancamento['servico_nome'] ?></td>
-                      <td>R$ <?= str_replace('.',',', $lancamento['val_total']) ?>
-                        <input type="hidden" id="val_total" value="<?= $lancamento['val_total'] ?>" />
-                      </td>
-                      <td>R$ <?= str_replace('.',',', $lancamento['val_total_empresa']) ?>
-                        <input type="hidden" id="val_total_empresa" value="<?= $lancamento['val_total_empresa'] ?>" />
-                      </td>
-                      <td class="text-center">
-                        <a href="lancamento.php?id=<?= $lancamento['id'] ?>" class="btn btn-default"><i class="fa fa-eye"></i></a>
-                        <a href="form-altera-lancamento.php?id=<?= $lancamento['id'] ?>" class="btn btn-default"><i class="fa fa-pencil"></i></a>
-                        <a data-url="exclui-lancamento.php?id=" data-id="<?= $lancamento['id'] ?>" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete">
+                         <a data-url="exclui-usuario.php?id=" data-id="<?= $usuario['id'] ?>" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete">
                           <i class="fa fa-trash-o"></i>
                         </a>
                       </td>
@@ -164,14 +167,6 @@ $lancamentos = listaLancamentos($conexao);
                 }
                 ?>
                 </tbody>
-                <tfoot>
-                <tr>
-                <th colspan="3">Total:</th>
-                <th id="somaValTotal"></th>
-                <th colspan="4">Total Empresa:</th>
-                <th id="somaValTotalEmpresa"></th>
-                </tr>
-                </tfoot>
               </table>
             </div>
             <!-- /.box-body -->
@@ -186,16 +181,61 @@ $lancamentos = listaLancamentos($conexao);
   </div>
   <!-- /.content-wrapper -->
 
-<!-- MODAL -->
+<!-- MODAL NOVO -->
+<div class="modal fade" id="modal-novo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header modal-success">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Novo Usuário</h4>
+        </div>
+        <div class="modal-body">
+          <form action="adiciona-usuario.php" id="form" method="POST">
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="row">
+                  <div class="col-xs-12">
+                  <div class="form-group mt-1">
+                      <label>Nome:</label>
+                      <input type="text" required name="nome" class="form-control">
+                    </div>
+                    <div class="form-group mt-1">
+                      <label>Email:</label>
+                      <input type="text" required name="email" class="form-control">
+                    </div>
+                    <div class="form-group mt-1">
+                      <label>Senha:</label>
+                      <input type="password" required name="password1" class="form-control">
+                    </div>
+                    <div class="form-group mt-1">
+                      <label>Confirmar:</label>
+                      <input type="password" required name="password2" class="form-control">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" form="form" class="btn btn-success" value="Submit">Cadastrar</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- MODAL EXCLUIR-->
 <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header modal-danger">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Excluir ordem</h4>
+        <h4 class="modal-title" id="myModalLabel">Excluir Usuário</h4>
       </div>
       <div class="modal-body">
-        Deseja realmente exluir este lançamento?
+        Deseja realmente exluir esta usuário?
       </div>
       <div class="modal-footer">
         <a type="button" class="btn btn-danger delete">Excluir</a>

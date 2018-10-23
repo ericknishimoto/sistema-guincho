@@ -1,4 +1,5 @@
 <?php
+require_once 'logica-usuario.php';
 require_once 'header.php';
 require_once 'conecta.php';
 require_once 'banco.php';

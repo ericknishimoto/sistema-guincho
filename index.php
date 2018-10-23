@@ -1,194 +1,149 @@
 <?php
-require_once 'header.php';
+include("logica-usuario.php");
 ?>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Dashboard
-        <small>Control panel</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
-      </ol>
-    </section>
+<html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Agape Service | Log in</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
 
-    <!-- Main content -->
-    <section class="content">
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 
-      <!-- BOXS -->
-      <div class="row">
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">CPU Traffic</span>
-                <span class="info-box-number">90<small>%</small></span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Likes</span>
-                <span class="info-box-number">41,410</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-
-          <!-- fix for small devices only -->
-          <div class="clearfix visible-sm-block"></div>
-
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Sales</span>
-                <span class="info-box-number">760</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">New Members</span>
-                <span class="info-box-number">2,000</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-      </div>
-
-      <!-- GRAFICOS -->
-      <div class="row">
-
-          <div class="col-md-6">
-            <!-- GRAFICO PIE -->
-            <div class="box box-primary">
-              <div class="box-header with-border">
-                <h3 class="box-title">Gráfico 01</h3>
-                <div class="box-tools pull-right">
-                  <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                    <i class="fa fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-box-tool" data-widget="remove">
-                    <i class="fa fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="box-body">
-                  <div id="donutchart" class="grafico"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- /.col (LEFT) -->
-          <div class="col-md-6">
-            <!-- GRAFICO COLUMN -->
-            <div class="box box-info">
-              <div class="box-header with-border">
-                <h3 class="box-title">Line Chart</h3>
-
-                <div class="box-tools pull-right">
-                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                </div>
-              </div>
-              <div class="box-body">
-                  <div id="top_x_div" class="grafico"></div>
-              </div>
-              <!-- /.box-body -->
-            </div>
-          </div>
-      </div>
-
-    </section>
-    <!-- /.content -->
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="index2.html"><b>Agape</b>Service</a>
   </div>
-
-<!-- GRAFICOS -->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-<!-- GRAFICO PIE -->
-<script type="text/javascript">
-  google.charts.load("current", {packages:["corechart"]});
-  google.charts.setOnLoadCallback(drawChart);
-  function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['Work',     11],
-      ['Eat',      2],
-      ['Commute',  2],
-      ['Watch TV', 2],
-      ['Sleep',    7]
-    ]);
-
-    var options = {
-      title: 'Título 01',
-      pieHole: 0.4,
-    };
-
-    var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-    chart.draw(data, options);
-  }
-</script>
-
-<!-- GRAFICO COLUMN-->
-<script type="text/javascript">
-  google.charts.load('current', {'packages':['bar']});
-  google.charts.setOnLoadCallback(drawStuff);
-
-  function drawStuff() {
-    var data = new google.visualization.arrayToDataTable([
-      ['Move', 'Percentage'],
-      ["King's pawn (e4)", 44,],
-      ["Queen's pawn (d4)", 31],
-      ["Knight to King 3 (Nf3)", 12],
-      ["Queen's bishop pawn (c4)", 10],
-      ['Other', 3]
-    ]);
-
-    var options = {
-      displayAnnotations: true,
-      legend: { position: 'none' },
-      chart: {
-        title: 'Chess opening moves',
-        subtitle: 'popularity by percentage' },
-      axes: {
-        x: {
-          0: { side: 'top', label: 'White to move'} // Top x-axis.
-        }
-      },
-      bar: { groupWidth: "90%" }
-    };
-
-    var chart = new google.charts.Bar(document.getElementById('top_x_div'));
-    // Convert the Classic options to Material options.
-    chart.draw(data, google.charts.Bar.convertOptions(options));
-  };
-</script>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg">Faça login para começar</p>
 
 <?php
-require_once 'footer.php';
+if(isset($_SESSION["usuario_logado"])) {
+    header("Location: dashboard.php");
+}
 ?>
+
+<?php
+if(isset($_GET["falhaDeSeguranca"])) {
+?>
+<div class="row">
+        <div class="col-xs-12">
+          <div class="box box-danger box-solid">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Erro!</h3>
+                  <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                Faço o login para continuar.
+                </div>
+                <!-- /.box-body -->
+            </div>
+          </div>
+      </div>
+<?php
+}
+?>
+
+<?php if(isset($_GET["logout"]) && $_GET["logout"]==true) {
+    ?>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box box-success box-solid">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Deslogado</h3>                  
+                  <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                Usuário deslogado com sucesso!
+                </div>
+                <!-- /.box-body -->
+            </div>
+          </div>
+      </div>
+    <?php
+      }
+  ?>
+
+<?php if(isset($_GET["login"]) && $_GET["login"]==0) {
+    ?>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box box-danger box-solid">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Erro!</h3>                  
+                  <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                Usuário ou senha inválido!
+                </div>
+                <!-- /.box-body -->
+            </div>
+          </div>
+      </div>
+    <?php
+      }
+  ?>
+
+    <form action="login.php" method="post">
+      <div class="form-group has-feedback">
+        <input class="form-control" type="email" name="email" placeholder="Email">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input class="form-control" type="password" name="senha" placeholder="Senha">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery 3 -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="plugins/iCheck/icheck.min.js"></script>
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' /* optional */
+    });
+  });
+</script>
+
+
+</body></html>

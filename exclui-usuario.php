@@ -24,20 +24,19 @@ require_once 'banco.php';
     
       <?php 
       
-      $id = $_POST["id"];
-      $nome = $_POST["nome"];
-      $empresas_id = $_POST["empresas_id"];
- 
+      $id = $_GET["id"];
       
-      if(alteraProduto($conexao,$id,$nome,$empresas_id))
+      if(excluiUsuario($conexao,$id))
       {
-        header ("Location: cadastro-produtos.php?alteracao=true");
+        header ("Location: cadastro-usuarios.php?exclusao=true");
         die();
-      }else{ 
+      } elseif(mysqli_errno($conexao)==1451) {
+        header ("Location: cadastro-usuarios.php?erro=1451");
+      } else { 
       ?>
         <h1>Algo deu errado:</h1>
         <?php
-          printf("Connect failed: %s\n", mysqli_error($conexao));
+          printf("Connect failed: %s\n", mysqli_errno($conexao));
         exit();
       }
       ?>

@@ -276,3 +276,26 @@ function excluiServico($conexao, $id) {
     $query = "delete from servicos where id = {$id}";
     return mysqli_query($conexao, $query);
 }
+
+function listaUsuarios($conexao) {
+    $usuarios = array();
+    $query = "select * from usuarios";
+    $resultado = mysqli_query($conexao, $query);
+    while ($usuario = mysqli_fetch_assoc($resultado)) {
+        array_push($usuarios, $usuario);
+    }
+    return $usuarios;
+}
+
+function insereUsuario($conexao,$nome,$email,$senha) { 
+    $query = "INSERT INTO usuarios (nome, email, senha)
+    VALUES ('{$nome}','{$email}','{$senha}')"; 
+
+    return mysqli_query($conexao, $query);
+}
+
+function excluiUsuario($conexao, $id) {
+    $query = "delete from usuarios where id = {$id}";
+    return mysqli_query($conexao, $query);
+}
+

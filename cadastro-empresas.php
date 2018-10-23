@@ -1,4 +1,6 @@
 <?php
+require_once 'logica-usuario.php';
+verificaUsuario();
 require_once 'header.php';
 require_once 'conecta.php';
 require_once 'banco.php';
@@ -39,7 +41,7 @@ $empresas = listaEmpresas($conexao);
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            O empresa foi cadastrada com sucesso!
+            A empresa foi cadastrada com sucesso!
             </div>
             <!-- /.box-body -->
           </div>
@@ -63,7 +65,7 @@ $empresas = listaEmpresas($conexao);
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            O motorista foi alterado com sucesso!
+            A empresa foi alterado com sucesso!
             </div>
             <!-- /.box-body -->
           </div>
