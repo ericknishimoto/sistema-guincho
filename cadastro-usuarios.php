@@ -1,6 +1,6 @@
 <?php
 require_once 'logica-usuario.php';
-verificaUsuario();
+verificaUsuario(); verificaAdmin();
 require_once 'header.php';
 require_once 'conecta.php';
 require_once 'banco.php';
@@ -143,8 +143,10 @@ $usuarios = listaUsuarios($conexao);
               <table id="tabela" class="table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
+                 <th>ID</th>
                   <th>Nome</th>
                   <th>Email</th>
+                  <th>Permissão</th>
                   <th class="text-center">Ações</th>
                 </tr>
                 </thead>
@@ -153,11 +155,13 @@ $usuarios = listaUsuarios($conexao);
                 <?php
                 foreach ($usuarios as $usuario) {
                 ?>
-
+                      <td><?= $usuario['id'] ?></td>
                       <td><?= $usuario['nome'] ?></td>
                       <td><?= $usuario['email'] ?></td>
+                      <td><?= $usuario['permissao'] ?></td>
                       <td class="text-center">
-                         <a data-url="exclui-usuario.php?id=" data-id="<?= $usuario['id'] ?>" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete">
+                        <a data-url="altera-usuario.php?id=" data-id="<?= $usuario['id'] ?>" class="btn btn-default mr-1" data-toggle="modal" data-target="#modal-altera"><i class="fa fa-lock"></i></a>                                            
+                        <a data-url="exclui-usuario.php?id=" data-id="<?= $usuario['id'] ?>" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete">
                           <i class="fa fa-trash-o"></i>
                         </a>
                       </td>
@@ -208,8 +212,15 @@ $usuarios = listaUsuarios($conexao);
                       <input type="password" required name="password1" class="form-control">
                     </div>
                     <div class="form-group mt-1">
-                      <label>Confirmar:</label>
-                      <input type="password" required name="password2" class="form-control">
+                      <label>Confirmar senha:</label>
+                      <input type="text" required name="password2" class="form-control">
+                    </div>
+                    <div class="form-group mt-1">
+                     <label>Permissão:</label>
+                      <select type="text" required name="permissao" class="form-control">
+                          <option value="admin">admin</option>
+                          <option value="user">user</option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -225,6 +236,49 @@ $usuarios = listaUsuarios($conexao);
     </div>
   </div>
 
+<!-- MODAL ALTERAR -->
+<div class="modal fade" id="modal-altera" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header modal-success">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Alterar Usuário</h4>
+        </div>
+        <div class="modal-body">
+          <form action="altera-usuario.php" id="form-altera" method="POST">
+          <input type="hidden" name="id" class="altera-id"/>
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="row">
+                  <div class="col-xs-12">
+                  <div class="form-group mt-1">
+                      <label>Nova senha:</label>
+                      <input type="password" required name="password1" class="form-control">
+                    </div>
+                    <div class="form-group mt-1">
+                      <label>Confirmar nova senha:</label>
+                      <input type="password" required name="password2" class="form-control">
+                    </div>
+                    <div class="form-group mt-1">
+                     <label>Permissão:</label>
+                      <select type="text" required name="permissao" class="form-control">
+                          <option value="admin">admin</option>
+                          <option value="user">user</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" form="form-altera" class="btn btn-success" value="Submit">Alterar</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+</div>
 
 <!-- MODAL EXCLUIR-->
 <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

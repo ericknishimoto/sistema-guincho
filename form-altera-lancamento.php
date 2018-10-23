@@ -1,6 +1,6 @@
 <?php
 require_once 'logica-usuario.php';
-verificaUsuario();
+verificaUsuario(); verificaAdmin();
 require_once 'header.php';
 require_once 'conecta.php';
 require_once 'banco.php';
@@ -36,7 +36,7 @@ $servicos = listaServicos($conexao);
           <div class="col-xs-12">
             <div class="box box-primary">
               <div class="box-header with-border">
-                <h3 class="box-title">Dados do gerais</h3>
+                <h3 class="box-title">Dados gerais</h3>
               </div>
               <div class="box-body">
                 <!-- .row -->

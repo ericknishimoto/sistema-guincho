@@ -32,15 +32,17 @@ include("logica-usuario.php");
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="index2.html"><b>Agape</b>Service</a>
+    <b>Agape</b>Service
   </div>
-  <!-- /.login-logo -->
-  <div class="login-box-body">
-    <p class="login-box-msg">Faça login para começar</p>
 
 <?php
+
 if(isset($_SESSION["usuario_logado"])) {
-    header("Location: dashboard.php");
+    if ($_SESSION["usuario_permissao"] == "admin"){
+      header("Location: dashboard.php");
+    }else{
+      header("Location: todos-lancamentos.php");
+    }
 }
 ?>
 
@@ -107,6 +109,12 @@ if(isset($_GET["falhaDeSeguranca"])) {
     <?php
       }
   ?>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+   
+
+  
+ <p class="login-box-msg">Faça login para começar</p>
 
     <form action="login.php" method="post">
       <div class="form-group has-feedback">

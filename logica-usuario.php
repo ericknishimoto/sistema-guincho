@@ -13,13 +13,21 @@ function verificaUsuario() {
   }
 }
 
+function verificaAdmin() {
+  if($_SESSION["usuario_permissao"] != "admin") {
+     header("Location: sem-permissao.php");
+     die();
+  }
+}
+
 function usuarioLogado($email) {
   return $_SESSION["usuario_logado"];
 }
 
-function logaUsuario($email,$nome) {
+function logaUsuario($email,$nome, $permissao) {
   $_SESSION["usuario_logado"] = $email;
   $_SESSION["usuario_nome"] = $nome;
+  $_SESSION["usuario_permissao"] = $permissao;
 }
 
 function logout() {

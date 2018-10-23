@@ -287,9 +287,21 @@ function listaUsuarios($conexao) {
     return $usuarios;
 }
 
-function insereUsuario($conexao,$nome,$email,$senha) { 
-    $query = "INSERT INTO usuarios (nome, email, senha)
-    VALUES ('{$nome}','{$email}','{$senha}')"; 
+function insereUsuario($conexao,$nome,$email,$senha,$permissao) { 
+    $query = "INSERT INTO usuarios (nome, email, senha, permissao)
+    VALUES ('{$nome}','{$email}','{$senha}','{$permissao}')"; 
+
+    return mysqli_query($conexao, $query);
+}
+
+function alteraUsuario($conexao,$id,$senha,$permissao)
+    { 
+    $query = "UPDATE usuarios set
+    senha = '{$senha}',
+    permissao = '{$permissao}'
+    
+    where id = '{$id}'
+    ";
 
     return mysqli_query($conexao, $query);
 }

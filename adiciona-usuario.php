@@ -1,6 +1,6 @@
 <?php 
 require_once 'logica-usuario.php';
-verificaUsuario();
+verificaUsuario(); verificaAdmin();
 require_once 'conecta.php';
 require_once 'banco.php';
 ?>
@@ -28,10 +28,11 @@ require_once 'banco.php';
       $email = $_POST["email"];
       $password1 = md5($_POST["password1"]);
       $password2 = md5($_POST["password2"]);
-      
+      $permissao = $_POST["permissao"];
+
       if ($password1 == $password2) {
 
-        if(insereUsuario($conexao,$nome,$email,$password1))
+        if(insereUsuario($conexao,$nome,$email,$password1,$permissao))
         {
           header ("Location: cadastro-usuarios.php?cadastro=true");
           die();

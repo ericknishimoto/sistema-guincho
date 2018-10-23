@@ -1,6 +1,6 @@
 <?php 
 require_once 'logica-usuario.php';
-verificaUsuario();
+verificaUsuario(); verificaAdmin();
 require_once 'conecta.php';
 require_once 'banco.php';
 ?>
@@ -25,22 +25,24 @@ require_once 'banco.php';
       <?php 
       
       $id = $_POST["id"];
-      $email = $_POST["email"];
       $password1 = md5($_POST["password1"]);
       $password2 = md5($_POST["password2"]);
+      $permissao = $_POST["permissao"];
       
-      if(alteraEmpresa($conexao,$id,$email,$password1))
-      {
-        header ("Location: cadastro-usuarios.php?alteracao=true");
-        die();
-      }elseif ($password1 != $password2) {
+      if ($password1 == $password2) {
+        if(alteraUsuario($conexao,$id,$password1,$permissao))
+        {
+          header ("Location: cadastro-usuarios.php?alteracao=true");
+          die();
+        }else{ 
+        ?>
+          <h1>Algo deu errado:</h1>
+          <?php
+            printf("Connect failed: %s\n", mysqli_error($conexao));
+          exit();
+        }
+      } else {
         header ("Location: cadastro-usuarios.php?senha=true");
-      }else{ 
-      ?>
-        <h1>Algo deu errado:</h1>
-        <?php
-          printf("Connect failed: %s\n", mysqli_error($conexao));
-        exit();
       }
       ?>
 

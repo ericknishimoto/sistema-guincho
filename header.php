@@ -90,27 +90,30 @@
         </div>
         <div class="pull-left info">
           <p><?= $_SESSION["usuario_nome"] ?></p>
-       <i class="fa fa-circle text-success"></i> <span class="h6">Online</span>
+       <i class="fa fa-key"></i> <span class="h6"><?= $_SESSION["usuario_permissao"] ?></span>
         </div>
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">PRINCIPAL</li>
+<?php if ($_SESSION["usuario_permissao"] == "admin"){?> 
         <li>
           <a href="dashboard.php">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
+<?php } ?>
         <li>
           <a href="todos-lancamentos.php">
             <i class="fa fa-list"></i> <span>Lançamentos</span>
           </a>
-        </li>     
+        </li>    
+<?php if ($_SESSION["usuario_permissao"] == "admin"){?>
         <li>
           <a href="#">
             <i class="fa fa-line-chart"></i> <span>Relatórios</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-gray">Off</small>
+              <small class="label pull-right bg-gray">DEV</small>
             </span>
           </a>
         </li>
@@ -131,12 +134,12 @@
           </li>
         <li><a href="cadastro-usuarios.php"><i class="fa fa-users"></i> <span>Usuários</span></a></li>
         <li><a href="#.php">
-        <i class="fa fa-wrench"></i> <span>Regras</span>
+        <i class="fa fa-cogs"></i> <span>Regras de Negócio</span>
         <span class="pull-right-container">
-              <small class="label pull-right bg-gray">Off</small>
+              <small class="label pull-right bg-gray">DEV</small>
         </span>
         </a></li>
-        
+<?php } ?> 
       </ul>
     </section>
     <!-- /.sidebar -->

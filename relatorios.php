@@ -77,7 +77,7 @@ $lancamentos = listaLancamentos($conexao);
 ?>
     <div class="row">
       <div class="col-xs-8">
-      <div class="box box-warning  box-solid">
+      <div class="box box-success  box-solid">
             <div class="box-header with-border">
               <h3 class="box-title">Excluído</h3>
               <div class="box-tools pull-right">

@@ -1,6 +1,6 @@
 <?php
 require_once 'logica-usuario.php';
-verificaUsuario();
+verificaUsuario(); verificaAdmin();
 require_once 'header.php';
 require_once 'conecta.php';
 require_once 'banco.php';
@@ -192,7 +192,7 @@ $empresas = listaEmpresas($conexao);
       <div class="modal-content">
         <div class="modal-header modal-success">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Novo produto</h4>
+          <h4 class="modal-title" id="myModalLabel">Novo Produto</h4>
         </div>
         <div class="modal-body">
           <form action="adiciona-produto.php" id="form" method="POST">
@@ -238,7 +238,7 @@ $empresas = listaEmpresas($conexao);
       <div class="modal-content">
         <div class="modal-header modal-success">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Alterar produto</h4>
+          <h4 class="modal-title" id="myModalLabel">Alterar Produto</h4>
         </div>
         <div class="modal-body">
           <form action="altera-produto.php" id="form-alterar" method="POST">
@@ -285,7 +285,7 @@ $empresas = listaEmpresas($conexao);
     <div class="modal-content">
       <div class="modal-header modal-danger">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Excluir produto</h4>
+        <h4 class="modal-title" id="myModalLabel">Excluir Produto</h4>
       </div>
       <div class="modal-body">
         Deseja realmente exluir este produto?

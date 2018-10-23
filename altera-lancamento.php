@@ -1,6 +1,6 @@
 <?php 
 require_once 'logica-usuario.php';
-verificaUsuario();
+verificaUsuario(); verificaAdmin();
 require_once 'conecta.php';
 require_once 'banco.php';
 ?>

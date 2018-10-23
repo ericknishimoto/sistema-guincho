@@ -1,6 +1,6 @@
 <?php
 require_once 'logica-usuario.php';
-verificaUsuario();
+verificaUsuario(); verificaAdmin();
 require_once 'header.php';
 require_once 'conecta.php';
 require_once 'banco.php';
@@ -274,7 +274,7 @@ $motoristas = listaMotoristas($conexao);
     <div class="modal-content">
       <div class="modal-header modal-danger">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Excluir motorista</h4>
+        <h4 class="modal-title" id="myModalLabel">Excluir Motorista</h4>
       </div>
       <div class="modal-body">
         Deseja realmente exluir este motorista?
