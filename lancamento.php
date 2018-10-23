@@ -212,3 +212,10 @@ $lancamentos = listaLancamento($conexao, $id);
 <?php
 require_once 'footer.php';
 ?>
+
+<script>
+  $(document).ready(function(){
+    let elemento = document.querySelector("#lancamentos");
+    elemento.classList.add("active");
+  })
+</script>

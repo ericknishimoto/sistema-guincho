@@ -270,3 +270,12 @@ $servicos = listaServicos($conexao);
 <?php
 require_once 'footer.php';
 ?>
+
+<script>
+  $(document).ready(function(){
+    let elemento = document.querySelector("#cadastros");
+    let subelemento = document.querySelector("#servicos");
+    elemento.classList.add("active");
+    subelemento.classList.add("active");
+  })
+</script>

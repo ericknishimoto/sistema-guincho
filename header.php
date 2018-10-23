@@ -97,19 +97,19 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">PRINCIPAL</li>
 <?php if ($_SESSION["usuario_permissao"] == "admin"){?> 
-        <li>
+        <li id="dashboard">
           <a href="dashboard.php">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
 <?php } ?>
-        <li>
+        <li id="lancamentos">
           <a href="todos-lancamentos.php">
             <i class="fa fa-list"></i> <span>Lançamentos</span>
           </a>
         </li>    
 <?php if ($_SESSION["usuario_permissao"] == "admin"){?>
-        <li>
+        <li id="relatorios">
           <a href="#">
             <i class="fa fa-line-chart"></i> <span>Relatórios</span>
             <span class="pull-right-container">
@@ -118,7 +118,7 @@
           </a>
         </li>
         <li class="header">CONFIGURAÇÕES</li>
-        <li class="treeview">
+        <li class="treeview" id="cadastros">
             <a href="#">
               <i class="fa fa fa-edit"></i> <span>Cadastros Gerais</span>
               <span class="pull-right-container">
@@ -126,14 +126,14 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="cadastro-motoristas.php"><i class="fa fa-circle-o"></i> Motoristas</a></li>
-              <li><a href="cadastro-empresas.php"><i class="fa fa-circle-o"></i> Empresas</a></li>
-              <li><a href="cadastro-produtos.php"><i class="fa fa-circle-o"></i> Produtos</a></li>
-              <li><a href="cadastro-servicos.php"><i class="fa fa-circle-o"></i> Serviços</a></li>
+              <li id="motoristas"><a href="cadastro-motoristas.php"><i class="fa fa-circle-o"></i> Motoristas</a></li>
+              <li id="empresas"><a href="cadastro-empresas.php"><i class="fa fa-circle-o"></i> Empresas</a></li>
+              <li id="produtos"><a href="cadastro-produtos.php"><i class="fa fa-circle-o"></i> Produtos</a></li>
+              <li id="servicos"><a href="cadastro-servicos.php"><i class="fa fa-circle-o"></i> Serviços</a></li>
             </ul>
           </li>
-        <li><a href="cadastro-usuarios.php"><i class="fa fa-users"></i> <span>Usuários</span></a></li>
-        <li><a href="#.php">
+        <li id="usuarios"><a href="cadastro-usuarios.php"><i class="fa fa-users"></i> <span>Usuários</span></a></li>
+        <li id="regras"><a href="#.php">
         <i class="fa fa-cogs"></i> <span>Regras de Negócio</span>
         <span class="pull-right-container">
               <small class="label pull-right bg-gray">DEV</small>

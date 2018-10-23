@@ -197,3 +197,10 @@ require_once 'header.php';
 <?php
 require_once 'footer.php';
 ?>
+
+<script>
+  $(document).ready(function(){
+    let elemento = document.querySelector("#dashboard");
+    elemento.classList.add("active");
+  })
+</script>
