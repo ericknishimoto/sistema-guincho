@@ -30,7 +30,7 @@ require_once 'header.php';
               <span class="info-box-icon bg-red"><i class="fa fa-ticket"></i></span>
 
                 <div class="info-box-content">
-                  <span class="info-box-text">Tickets</span>
+                  <span class="info-box-text">Lançamentos Mês</span>
                   <span class="h1">41</span>
                 </div>
               <!-- /.info-box-content -->
@@ -44,7 +44,7 @@ require_once 'header.php';
               
 
               <div class="info-box-content">
-                <span class="info-box-text">km</span>
+                <span class="info-box-text">KM Mês</span>
                 <span class="h1">900</span>
               </div>
               <!-- /.info-box-content -->
@@ -61,7 +61,7 @@ require_once 'header.php';
               <span class="info-box-icon bg-aqua"><i class="fa fa-usd"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Total</span>
+                <span class="info-box-text">RECEITA Mês</span>
                 R$ <span class="h2">760</span>
               </div>
               <!-- /.info-box-content -->
@@ -74,7 +74,7 @@ require_once 'header.php';
               <span class="info-box-icon bg-green"><i class="fa fa-suitcase"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Total Empresa</span>
+                <span class="info-box-text">RECEITA Empresa Mês</span>
                 R$ <span class="h2">9000,55</span>
               </div>
               <!-- /.info-box-content -->
@@ -96,9 +96,9 @@ require_once 'header.php';
                   <button type="button" class="btn btn-box-tool" data-widget="collapse">
                     <i class="fa fa-minus"></i>
                   </button>
-                  <button type="button" class="btn btn-box-tool" data-widget="remove">
+                  <!-- <button type="button" class="btn btn-box-tool" data-widget="remove">
                     <i class="fa fa-times"></i>
-                  </button>
+                  </button> -->
                 </div>
               </div>
               <div class="box-body">
@@ -117,7 +117,7 @@ require_once 'header.php';
                 <div class="box-tools pull-right">
                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                   </button>
-                  <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button> -->
                 </div>
               </div>
               <div class="box-body">

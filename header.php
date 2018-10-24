@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Agape Service | Dashboard</title>
+  <title>Agape Service WEB</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -54,11 +54,11 @@
     <a href="/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini">
-      <img src="dist/img/logo-white-mini.png" style="width: 35px">
+      <b>A</b>S
       </span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg">
-      <img src="dist/img/logo-white.png" style="width: 100px">
+      <b>Agape</b>|Service
       </span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
@@ -96,7 +96,7 @@
         </div>
         <div class="pull-left info">
           <p><?= $_SESSION["usuario_nome"] ?></p>
-       <i class="fa fa-key"></i> <span class="h6"><?= $_SESSION["usuario_permissao"] ?></span>
+       <i class="fa fa-user" style="color: #b8c7ce"></i> <span class="h6" style="color: #b8c7ce"><?= $_SESSION["usuario_permissao"] ?></span>
         </div>
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
