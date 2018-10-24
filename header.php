@@ -51,9 +51,13 @@
     <!-- Logo -->
     <a href="/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>S</span>
+      <span class="logo-mini">
+      <img src="dist/img/logo-white-mini.png" style="width: 35px">
+      </span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Agape</b>Service</span>
+      <span class="logo-lg">
+      <img src="dist/img/logo-white.png" style="width: 100px">
+      </span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
