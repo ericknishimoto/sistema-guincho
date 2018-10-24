@@ -3,6 +3,17 @@
 require_once 'logica-usuario.php';
 verificaUsuario(); verificaAdmin();
 require_once 'header.php';
+require_once 'conecta.php';
+require_once 'banco.php';
+
+$mesAtual = date('m');
+$lancamentos = contaLancamentosDashboard($conexao,$mesAtual);
+$kms = contaKmsDashboard($conexao,$mesAtual);
+$valTotal = str_replace('.',',', contaValTotalDashboard($conexao,$mesAtual));
+$valTotalEmp =  str_replace('.',',', contaValTotalEmpDashboard($conexao,$mesAtual));
+$kms = contaKmsDashboard($conexao,$mesAtual);
+$lancamentoMotorista = contaMotoristasDashboard($conexao,$mesAtual);
+$rendaMensal = contaRendaDashboard($conexao);
 
 ?>
 
@@ -27,11 +38,11 @@ require_once 'header.php';
       <div class="row">
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
-              <span class="info-box-icon bg-red"><i class="fa fa-ticket"></i></span>
+              <span class="info-box-icon bg-red"><i class="fa fa-edit"></i></span>
 
                 <div class="info-box-content">
                   <span class="info-box-text">Lançamentos Mês</span>
-                  <span class="h1">41</span>
+                  <span class="h1"><?= $lancamentos['total'] ?></span>
                 </div>
               <!-- /.info-box-content -->
             </div>
@@ -40,12 +51,12 @@ require_once 'header.php';
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
-            <span class="info-box-icon bg-yellow"><i class="fa fa-truck"></i></span>
+            <span class="info-box-icon bg-yellow"><i class="fa fa-car"></i></span>
               
 
               <div class="info-box-content">
                 <span class="info-box-text">KM Mês</span>
-                <span class="h1">900</span>
+                <span class="h1"><?= $kms['total'] ?></span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -61,8 +72,8 @@ require_once 'header.php';
               <span class="info-box-icon bg-aqua"><i class="fa fa-usd"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">RECEITA Mês</span>
-                R$ <span class="h2">760</span>
+                <span class="info-box-text">TOTAL Mês</span>
+                R$ <span class="h2"><?= $valTotal['total'] ?></span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -74,8 +85,8 @@ require_once 'header.php';
               <span class="info-box-icon bg-green"><i class="fa fa-suitcase"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">RECEITA Empresa Mês</span>
-                R$ <span class="h2">9000,55</span>
+                <span class="info-box-text">Total Empresa Mês</span>
+                R$ <span class="h2"><?= $valTotalEmp['total'] ?></span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -91,7 +102,7 @@ require_once 'header.php';
             <!-- GRAFICO PIE -->
             <div class="box box-primary">
               <div class="box-header with-border">
-                <h3 class="box-title">Gráfico 01</h3>
+                <h3 class="box-title">Lançamentos x Motoristas | Mês atual</h3>
                 <div class="box-tools pull-right">
                   <button type="button" class="btn btn-box-tool" data-widget="collapse">
                     <i class="fa fa-minus"></i>
@@ -110,9 +121,9 @@ require_once 'header.php';
           <!-- /.col (LEFT) -->
           <div class="col-md-6">
             <!-- GRAFICO COLUMN -->
-            <div class="box box-info">
+            <div class="box box-primary">
               <div class="box-header with-border">
-                <h3 class="box-title">Line Chart</h3>
+                <h3 class="box-title">Faturamento Mensal</h3>
 
                 <div class="box-tools pull-right">
                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -121,7 +132,7 @@ require_once 'header.php';
                 </div>
               </div>
               <div class="box-body">
-                  <div id="top_x_div" class="grafico"></div>
+              <div id="chart_div" class="grafico"></div>
               </div>
               <!-- /.box-body -->
             </div>
@@ -141,17 +152,17 @@ require_once 'header.php';
   google.charts.setOnLoadCallback(drawChart);
   function drawChart() {
     var data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['Work',     11],
-      ['Eat',      2],
-      ['Commute',  2],
-      ['Watch TV', 2],
-      ['Sleep',    7]
+      ['Nome', 'Total de lançamentos'],
+      <?php foreach ($lancamentoMotorista as $lancamento) : ?>
+        ['<?= $lancamento['motorista_nome']?>',<?= $lancamento['total']?>],
+      <?php endforeach ?>
     ]);
 
     var options = {
-      title: 'Título 01',
+
       pieHole: 0.4,
+      pieSliceText: 'value',
+      legend: { position: 'top', alignment: 'center'}
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
@@ -159,40 +170,37 @@ require_once 'header.php';
   }
 </script>
 
-<!-- GRAFICO COLUMN-->
+<!-- GRAFICO BAR-->
 <script type="text/javascript">
-  google.charts.load('current', {'packages':['bar']});
-  google.charts.setOnLoadCallback(drawStuff);
+      google.charts.load('current', {'packages':['corechart', 'bar']});
+      google.charts.setOnLoadCallback(drawStuff);
 
-  function drawStuff() {
-    var data = new google.visualization.arrayToDataTable([
-      ['Move', 'Percentage'],
-      ["King's pawn (e4)", 44,],
-      ["Queen's pawn (d4)", 31],
-      ["Knight to King 3 (Nf3)", 12],
-      ["Queen's bishop pawn (c4)", 10],
-      ['Other', 3]
-    ]);
+      function drawStuff() {
 
-    var options = {
-      displayAnnotations: true,
-      legend: { position: 'none' },
-      chart: {
-        title: 'Chess opening moves',
-        subtitle: 'popularity by percentage' },
-      axes: {
-        x: {
-          0: { side: 'top', label: 'White to move'} // Top x-axis.
+        var chartDiv = document.getElementById('chart_div');
+
+        var data = google.visualization.arrayToDataTable([
+          ['Gráfico', 'Total', 'Total Empresa', { role: 'annotation' }],
+          <?php foreach ($rendaMensal as $lancamento) : ?>
+            ['<?= $lancamento['data']?>',<?= $lancamento['val_total']?>,<?= $lancamento['val_total_empresa']?>,"oi"],
+          <?php endforeach ?>
+
+        ]);
+
+        var materialOptions = {
+          legend: { position: 'top', alignment: 'center'},
+        };
+
+        function drawMaterialChart() {
+          var materialChart = new google.charts.Bar(chartDiv);
+          materialChart.draw(data, google.charts.Bar.convertOptions(materialOptions));
+          button.innerText = 'Change to Classic';
+          button.onclick = drawClassicChart;
         }
-      },
-      bar: { groupWidth: "90%" }
-    };
 
-    var chart = new google.charts.Bar(document.getElementById('top_x_div'));
-    // Convert the Classic options to Material options.
-    chart.draw(data, google.charts.Bar.convertOptions(options));
-  };
-</script>
+        drawMaterialChart();
+    };
+    </script>
 
 <?php
 require_once 'footer.php';

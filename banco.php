@@ -1,4 +1,131 @@
 <?php
+function contaLancamentosDashboard($conexao, $data) {
+
+    $lancamentos = array();
+    $resultado = mysqli_query($conexao, "
+        select COUNT(*) as total
+        from lancamentos 
+        where MONTH(data) = $data
+        order by data desc;
+        ");
+  
+    $lancamento = mysqli_fetch_assoc($resultado);
+    return $lancamento;
+}
+
+function contaKmsDashboard($conexao, $data) {
+
+    $lancamentos = array();
+    $resultado = mysqli_query($conexao, "
+        select SUM(km_total) as total
+        from lancamentos 
+        where MONTH(data) = $data
+        order by data desc;
+        ");
+  
+    $lancamento = mysqli_fetch_assoc($resultado);
+    return $lancamento;
+}
+
+function contaValTotalDashboard($conexao, $data) {
+
+    $lancamentos = array();
+    $resultado = mysqli_query($conexao, "
+        select SUM(val_total) as total
+        from lancamentos 
+        where MONTH(data) = $data
+        order by data desc;
+        ");
+  
+    $lancamento = mysqli_fetch_assoc($resultado);
+    return $lancamento;
+}
+
+function contaValTotalEmpDashboard($conexao, $data) {
+
+    $lancamentos = array();
+    $resultado = mysqli_query($conexao, "
+        select SUM(val_total_empresa) as total
+        from lancamentos 
+        where MONTH(data) = $data
+        order by data desc;
+        ");
+  
+    $lancamento = mysqli_fetch_assoc($resultado);
+    return $lancamento;
+}
+
+function contaMotoristasDashboard($conexao, $data) {
+
+    $lancamentos = array();
+    $resultado = mysqli_query($conexao, "
+        select
+        count(l.id) as total,
+        l.data as data,
+        m.nome as motorista_nome
+
+        from
+        motoristas as m
+
+        join lancamentos as l
+        on m.id = l.motoristas_id
+
+        join empresas as e
+        on e.id = l.empresas_id
+
+        join produtos as p
+        on p.id = l.produtos_id
+
+        join servicos as s
+        on s.id = l.servicos_id
+        
+        where MONTH(data) = $data
+        
+        group by motorista_nome
+        ");
+  
+        while ($lancamento = mysqli_fetch_assoc($resultado)) {
+            array_push($lancamentos, $lancamento);
+          }
+          return $lancamentos;
+}
+
+function contaRendaDashboard($conexao) {
+
+    $lancamentos = array();
+    $resultado = mysqli_query($conexao, "
+
+        select
+                
+        Upper(substr(MONTHNAME(l.data), 1)) as data,
+        sum(val_total) as val_total,
+        sum(val_total_empresa) as val_total_empresa
+
+        from
+        motoristas as m
+
+        join lancamentos as l
+        on m.id = l.motoristas_id
+
+        join empresas as e
+        on e.id = l.empresas_id
+
+        join produtos as p
+        on p.id = l.produtos_id
+
+        join servicos as s
+        on s.id = l.servicos_id
+        
+        group by MONTHNAME(data)
+        ORDER BY MONTHNAME(data) DESC
+        ");
+  
+    while ($lancamento = mysqli_fetch_assoc($resultado)) {
+        array_push($lancamentos, $lancamento);
+        }
+        return $lancamentos;
+}
+
 function listaLancamentos($conexao) {
     $lancamentos = array();
     $resultado = mysqli_query($conexao, "
@@ -85,9 +212,9 @@ function listaLancamento($conexao, $id) {
     ");
   
     return mysqli_fetch_assoc($resultado);
-  }
+}
 
-  function listaLancamentosMotorista($conexao, $motorista) {
+function listaLancamentosMotorista($conexao, $motorista) {
 
     if ($motorista == "todos") {
 
@@ -161,7 +288,7 @@ function listaLancamento($conexao, $id) {
     return $lancamentos;
 }
   
-  function insereLancamento ($conexao,$date_for_database,$motorista,$empresa,$produto,$servico,$workorder,
+function insereLancamento ($conexao,$date_for_database,$motorista,$empresa,$produto,$servico,$workorder,
       $ref_externa,$veiculo,$placa,$km_total,$pedagio_decimal,$extras,$origem,$destino,$val_total,$val_total_empresa,$obs)
       { 
       $query = "INSERT INTO lancamentos (data,motoristas_id, empresas_id, produtos_id, servicos_id, workorder, ref_externa, veiculo, placa, km_total, pedagio, extras, origem, destino, val_total, val_total_empresa, obs)
