@@ -117,7 +117,7 @@ function contaRendaDashboard($conexao) {
         on s.id = l.servicos_id
         
         group by MONTHNAME(data)
-        ORDER BY MONTHNAME(data) DESC
+        ORDER BY l.data
         ");
   
     while ($lancamento = mysqli_fetch_assoc($resultado)) {
