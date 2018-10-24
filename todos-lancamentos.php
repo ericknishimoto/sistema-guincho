@@ -5,7 +5,14 @@ require_once 'header.php';
 require_once 'conecta.php';
 require_once 'banco.php';
 
-$lancamentos = listaLancamentos($conexao);
+if(isset($_GET["motorista"])) {
+  $motorista =  ($_GET["motorista"]);
+  $lancamentos = listaLancamentosMotorista($conexao, $motorista);
+  $motoristas = listaMotoristas($conexao);
+} else {
+  $lancamentos = listaLancamentos($conexao);
+  $motoristas = listaMotoristas($conexao);
+}
 
 ?>
 
@@ -98,10 +105,26 @@ $lancamentos = listaLancamentos($conexao);
   }
 ?>
     <div class="row">
-      <div class="col-xs-7 col-md-3">
+      <div class="col-sm-4 col-md-3">
         <a href="form-novo-lancamento.php" class="btn btn-block btn-success margin-bottom">
           <span>Novo Lançamento</span>
         </a>
+      </div>
+      <div class="col-sm-5 col-md-4">
+
+        <div class="input-group">
+        <select onchange="test(this)" id="select_id" type="text" required name="motoristas_nome" class="form-control altera-empresa">
+            <option value="todos" disabled selected>Filtra motorista</option>
+            <option value="todos">Todos</option>
+            <?php foreach ($motoristas as $motorista) : ?>
+              <option value="<?= $motorista['nome'] ?>"><?= $motorista['nome'] ?></option>
+            <?php endforeach ?>
+          </select>
+          <span class="input-group-btn">
+            <a href="todos-lancamentos.php?motorista=todos" id="lnk-nome" class="btn btn-default btn-block margin-bottom"><i class="fa  fa-search"></i></a>
+          </span>
+        </div>
+
       </div>
     </div>
 
@@ -208,6 +231,13 @@ $lancamentos = listaLancamentos($conexao);
 <?php
 require_once 'footer.php';
 ?>
+
+<script>
+function test(el) {
+  var $lnk = document.getElementById("lnk-nome");
+  $lnk.href = $lnk.href.replace(/motorista=(.*)/, 'motorista=') + el.value;
+}
+</script>
 
 <script>
   $(document).ready(function(){

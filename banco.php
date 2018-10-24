@@ -86,6 +86,80 @@ function listaLancamento($conexao, $id) {
   
     return mysqli_fetch_assoc($resultado);
   }
+
+  function listaLancamentosMotorista($conexao, $motorista) {
+
+    if ($motorista == "todos") {
+
+        $lancamentos = array();
+        $resultado = mysqli_query($conexao, "
+          select
+          l.id as id,
+          l.data as data,
+          m.nome as motorista_nome,
+          e.nome as empresa_nome,
+          p.nome as produto_nome,
+          s.nome as servico_nome,
+          val_total,
+          val_total_empresa
+    
+          from
+          motoristas as m
+      
+          join lancamentos as l
+          on m.id = l.motoristas_id
+      
+          join empresas as e
+          on e.id = l.empresas_id
+      
+          join produtos as p
+          on p.id = l.produtos_id
+      
+          join servicos as s
+          on s.id = l.servicos_id
+    
+          ");
+    } else {
+        
+    $lancamentos = array();
+    $resultado = mysqli_query($conexao, "
+      select
+      l.id as id,
+      l.data as data,
+      m.nome as motorista_nome,
+      e.nome as empresa_nome,
+      p.nome as produto_nome,
+      s.nome as servico_nome,
+      val_total,
+      val_total_empresa
+
+      from
+      motoristas as m
+  
+      join lancamentos as l
+      on m.id = l.motoristas_id
+  
+      join empresas as e
+      on e.id = l.empresas_id
+  
+      join produtos as p
+      on p.id = l.produtos_id
+  
+      join servicos as s
+      on s.id = l.servicos_id
+
+      where 
+      
+      m.nome =  '$motorista'
+
+      ");
+    }
+  
+    while ($lancamento = mysqli_fetch_assoc($resultado)) {
+      array_push($lancamentos, $lancamento);
+    }
+    return $lancamentos;
+}
   
   function insereLancamento ($conexao,$date_for_database,$motorista,$empresa,$produto,$servico,$workorder,
       $ref_externa,$veiculo,$placa,$km_total,$pedagio_decimal,$extras,$origem,$destino,$val_total,$val_total_empresa,$obs)
