@@ -1,3 +1,14 @@
+.min-width1 {
+    min-width: 130px;
+    max-width: 130px;
+}
+
+.min-width2 {
+    min-width: 70px;
+    max-width: 70px;
+}
+
+
 .mt-1 {
 margin-top: 1rem;
 }
@@ -71,4 +82,8 @@ margin-top: 4rem;
 .grafico {
     width: 100%; 
     min-height: 450px;
+  }
+
+  .filtro-width{
+      max-width: 100px;
   }

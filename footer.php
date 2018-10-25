@@ -98,20 +98,8 @@
       return false;
   });
 
-    $(function () {
-      $('#example1').DataTable()
-      $('#example2').DataTable({
-        'paging'      : true,
-        'lengthChange': false,
-        'searching'   : false,
-        'ordering'    : true,
-        'info'        : true,
-        'autoWidth'   : true,
-        'responsive'  : true
-      })
-    })
-
-      $(function () {
+  
+  $(function () {
       $('#tabela').DataTable({
         'paging'      : false,
         'lengthMenu'  : false,
@@ -128,6 +116,45 @@
         todayHighlight : true,
         orientation: "left",
       })
+</script>
+<!-- TABELA TODOS LANCAMENTOS -->
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true,
+      'responsive'  : true
+    })
+  })
+  
+$(document).ready(function() {
+    // Setup - add a text input to each footer cell
+    $('#example1 .filtro th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" class="form-control filtro-width text-center" placeholder="Filtrar" />' );
+    } );
+ 
+    // DataTable
+    var table = $('#example1').DataTable();
+ 
+    // Apply the search
+    table.columns().every( function () {
+        var that = this;
+ 
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+} );
 </script>
 <!-- VALORES TODOS LANCAMENTOS -->
 <script>

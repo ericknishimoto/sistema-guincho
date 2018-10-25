@@ -137,7 +137,7 @@ if(isset($_GET["motorista"])) {
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
-              <table id="example1" class="table table-bordered table-striped table-hover">
+              <table id="example1" class="table table-bordered table-striped table-hover compact text-center">
                 <thead>
                 <tr>
                   <th>#Ordem</th>
@@ -147,12 +147,12 @@ if(isset($_GET["motorista"])) {
                   <th>Produto</th>
                   <th>Serviço</th>
                   <th>Total</th>
-                  <th>Total Empresa</th>
+                  <th>Empresa</th>
                   <th clas="text-center">Ações</th>
                 </tr>
                 </thead>
-                <tbody>
 
+                <tbody>
                 <?php
                 foreach ($lancamentos as $lancamento) {
                 $data = date('d-m-Y', strtotime(str_replace('-','/', $lancamento['data'])));
@@ -174,7 +174,7 @@ if(isset($_GET["motorista"])) {
                       <td>R$ <?= str_replace('.',',', $lancamento['val_total_empresa']) ?>
                         <input type="hidden" id="val_total_empresa" value="<?= $lancamento['val_total_empresa'] ?>" />
                       </td>
-                      <td class="text-center">
+                      <td class="min-width1 text-center">
                         <a href="lancamento.php?id=<?= $lancamento['id'] ?>" class="btn btn-default"><i class="fa fa-eye"></i></a>
                         <a href="form-altera-lancamento.php?id=<?= $lancamento['id'] ?>" class="btn btn-default"><i class="fa fa-pencil"></i></a>
                         <a data-url="exclui-lancamento.php?id=" data-id="<?= $lancamento['id'] ?>" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete">
@@ -187,13 +187,26 @@ if(isset($_GET["motorista"])) {
                 }
                 ?>
                 </tbody>
+                <tfoot class="filtro">
+                  <tr>
+                  <th>#Ordem</th>
+                        <th>Data</th>
+                        <th>Motorista</th>
+                        <th>Empresa</th>
+                        <th>Produto</th>
+                        <th>Serviço</th>
+                        <th>Total</th>
+                        <th>Empresa</th>
+                        <th style="display: none">Empresa</th>
+                  </tr>
+                </tfoot>
                 <tfoot>
-                <tr>
-                <th colspan="3">Total:</th>
-                <th id="somaValTotal"></th>
-                <th colspan="4">Total Empresa:</th>
-                <th id="somaValTotalEmpresa"></th>
-                </tr>
+                  <tr>
+                  <th colspan="3">Total:</th>
+                  <th id="somaValTotal"></th>
+                  <th colspan="4">Total Empresa:</th>
+                  <th id="somaValTotalEmpresa"></th>
+                  </tr>
                 </tfoot>
               </table>
             </div>

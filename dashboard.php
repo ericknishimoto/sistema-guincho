@@ -172,35 +172,33 @@ $rendaMensal = contaRendaDashboard($conexao);
 
 <!-- GRAFICO BAR-->
 <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart', 'bar']});
-      google.charts.setOnLoadCallback(drawStuff);
+  google.charts.load('current', {'packages':['corechart', 'bar']});
+  google.charts.setOnLoadCallback(drawStuff);
 
-      function drawStuff() {
+  function drawStuff() {
 
-        var chartDiv = document.getElementById('chart_div');
+    var chartDiv = document.getElementById('chart_div');
 
-        var data = google.visualization.arrayToDataTable([
-          ['Gráfico', 'Total', 'Total Empresa', { role: 'annotation' }],
-          <?php foreach ($rendaMensal as $lancamento) : ?>
-            ['<?= $lancamento['data']?>',<?= $lancamento['val_total']?>,<?= $lancamento['val_total_empresa']?>,"oi"],
-          <?php endforeach ?>
+    var data = google.visualization.arrayToDataTable([
+      [' ', 'Total', 'Total Empresa'],
+      <?php foreach ($rendaMensal as $lancamento) : ?>
+        ['<?= $lancamento['data']?>',<?= $lancamento['val_total']?>,<?= $lancamento['val_total_empresa']?>],
+      <?php endforeach ?>
+    ]);
 
-        ]);
-
-        var materialOptions = {
-          legend: { position: 'top', alignment: 'center'},
-        };
-
-        function drawMaterialChart() {
-          var materialChart = new google.charts.Bar(chartDiv);
-          materialChart.draw(data, google.charts.Bar.convertOptions(materialOptions));
-          button.innerText = 'Change to Classic';
-          button.onclick = drawClassicChart;
-        }
-
-        drawMaterialChart();
+    var materialOptions = {
+      legend: { position: 'top', alignment: 'center'},
     };
-    </script>
+
+    function drawMaterialChart() {
+      var materialChart = new google.charts.Bar(chartDiv);
+      materialChart.draw(data, google.charts.Bar.convertOptions(materialOptions));
+      
+    }
+
+    drawMaterialChart();
+  };
+</script>
 
 <?php
 require_once 'footer.php';
