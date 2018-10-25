@@ -47,8 +47,11 @@
 <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="bower_components/fastclick/lib/fastclick.js"></script>
+<!-- Accent neutralise -->
+<script src="dist/js/accent-neutralise.js"></script>
 
 <!-- page script -->
+
 <!-- MODAL E DATEPICKER -->
 <script>
   $('a[data-target="#modal-delete"]').on('click', function (e) { 
@@ -98,7 +101,6 @@
       return false;
   });
 
-  
   $(function () {
       $('#tabela').DataTable({
         'paging'      : false,
@@ -117,45 +119,51 @@
         orientation: "left",
       })
 </script>
+
 <!-- TABELA TODOS LANCAMENTOS -->
 <script>
-  $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : true,
-      'responsive'  : true
-    })
-  })
   
-$(document).ready(function() {
+  $(document).ready(function() {
     // Setup - add a text input to each footer cell
-    $('#example1 .filtro th').each( function () {
+    $('#example1 thead tr').clone(true).appendTo( '#example1 thead' );
+    $('#example1 thead tr:eq(1) th').each( function (i) {
         var title = $(this).text();
-        $(this).html( '<input type="text" id="input-filtro" class="form-control filtro-width text-center" placeholder="Filtrar" />' );
-    } );
+        $(this).html( '<input type="search" id="input-filtro" class="form-control filtro-width text-center" placeholder="Filtrar" />' );
  
-    // DataTable
-    var table = $('#example1').DataTable();
- 
-    // Apply the search
-    table.columns().every( function () {
-        var that = this;
- 
-        $( 'input', this.footer() ).on( 'keyup change', function () {
-            if ( that.search() !== this.value ) {
-                that
-                    .search( this.value )
+        $( 'input', this ).on( 'keyup change', function () {
+            if ( table.column(i).search() !== this.value ) {
+                table
+                    .column(i)
+                    .search( jQuery.fn.DataTable.ext.type.search.string(this.value) ) //jQuery.fn.DataTable.ext.type.search.string: remove acentos;
                     .draw();
             }
         } );
     } );
+ 
+    var table = $('#example1').DataTable( {
+        orderCellsTop: true,
+        fixedHeader: true
+    } );
 } );
+
+  $(document).ready(function() {
+    let ultimoInput = document.querySelector("#thAcoes > input");
+    ultimoInput.style.display="none";
+
+    let ultimoTh = document.querySelectorAll("#thAcoes");
+    ultimoTh[1].innerHTML = '<a id="limpar-input" onclick="limparInput()" class="btn btn-default">Limpar</a>';
+    
+  });
 </script>
+
+<!-- BOTAO LIMPAR INPUT  TODOS LANCAMENTOS -->
+<script>
+  function limparInput(){
+    $('input').val('');
+    $('input').change();
+  }
+</script>
+
 <!-- VALORES TODOS LANCAMENTOS -->
 <script>
   $(document).ready(function(){
@@ -172,7 +180,6 @@ $(document).ready(function() {
 
         var thValTotal = document.querySelector("#somaValTotal");
         thValTotal.innerHTML = "R$" + parseFloat(somaValTotal).toFixed(2);
-
       }
 
       for (var i = 0; i < valTotalEmpresa.length; i++ ){
@@ -183,7 +190,7 @@ $(document).ready(function() {
         thValTotalEmpresa.innerHTML = "R$" + parseFloat(somaValTotalEmpresa).toFixed(2);
       }
 
-    var campoFiltro = document.querySelector("[type=search]");
+    var campoFiltro = document.querySelectorAll("[type=search]");
     campoFiltro.addEventListener("input", function(){ //input: escuta o input de dados;
       let valTotal = document.querySelectorAll("#val_total"); //Seleciona todas as ID ##val_total e captura o valor.
       let somaValTotal = 0;
@@ -210,6 +217,22 @@ $(document).ready(function() {
     
     })
   });
+</script>
+
+<!-- IGNORA ACENTOS -->
+<script>
+  function replaceSpecialChars(str)
+    {
+        str = str.replace(/[ÀÁÂÃÄÅ]/,"A");
+        str = str.replace(/[àáâãäå]/,"a");
+        str = str.replace(/[ÈÉÊË]/,"E");
+        str = str.replace(/[Ç]/,"C");
+        str = str.replace(/[ç]/,"c");
+
+        // o resto
+
+        return str.replace(/[^a-z0-9]/gi,''); 
+    }
 </script>
 
 </body>

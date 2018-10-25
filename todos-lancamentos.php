@@ -113,7 +113,7 @@ if(isset($_GET["motorista"])) {
       <div class="col-sm-5 col-md-4">
 
         <div class="input-group">
-        <select onchange="test(this)" id="select_id" type="text" required name="motoristas_nome" class="form-control altera-empresa">
+        <select onchange="capturaMotorista(this)" id="select_id" type="text" required name="motoristas_nome" class="form-control altera-empresa">
             <option value="todos" disabled selected>Filtra motorista</option>
             <option value="todos">Todos</option>
             <?php foreach ($motoristas as $motorista) : ?>
@@ -137,7 +137,7 @@ if(isset($_GET["motorista"])) {
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
-              <table id="example1" class="table table-bordered table-striped table-hover compact text-center">
+              <table id="example1" class="table table-bordered table-striped compact text-center">
                 <thead>
                 <tr>
                   <th>#Ordem</th>
@@ -147,8 +147,8 @@ if(isset($_GET["motorista"])) {
                   <th>Produto</th>
                   <th>Serviço</th>
                   <th>Total</th>
-                  <th>Empresa</th>
-                  <th clas="text-center">Ações</th>
+                  <th>Total Emp</th>
+                  <th id="thAcoes" class="text-center">Ações</th>
                 </tr>
                 </thead>
 
@@ -187,27 +187,14 @@ if(isset($_GET["motorista"])) {
                 }
                 ?>
                 </tbody>
-                <tfoot class="filtro">
-                  <tr>
-                  <th>#Ordem</th>
-                        <th>Data</th>
-                        <th>Motorista</th>
-                        <th>Empresa</th>
-                        <th>Produto</th>
-                        <th>Serviço</th>
-                        <th>Total</th>
-                        <th>Empresa</th>
-                        <th style="display: none">Empresa</th>
-                  </tr>
-                </tfoot>
-                <tfoot>
+                <tbody>
                   <tr>
                   <th colspan="3">Total:</th>
                   <th id="somaValTotal"></th>
                   <th colspan="4">Total Empresa:</th>
                   <th id="somaValTotalEmpresa"></th>
                   </tr>
-                </tfoot>
+                </tbody>
               </table>
             </div>
             <!-- /.box-body -->
@@ -246,12 +233,13 @@ require_once 'footer.php';
 ?>
 
 <script>
-function test(el) {
+function capturaMotorista(el) {
   var $lnk = document.getElementById("lnk-nome");
   $lnk.href = $lnk.href.replace(/motorista=(.*)/, 'motorista=') + el.value;
 }
 </script>
 
+<!-- ATIVAR NAV -->
 <script>
   $(document).ready(function(){
     let elemento = document.querySelector("#lancamentos");
