@@ -1,4 +1,9 @@
 <?php
+//RESETA TODOS OS COOKIES
+foreach($_COOKIE as $key=>$ck){
+  setcookie($key, $ck, time()-3600); //seta o cookie com vencimento no passado, invalidando-o
+}
+
 include("logica-usuario.php");
 ?>
 
