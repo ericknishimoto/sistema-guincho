@@ -27,10 +27,10 @@ $rendaMensal = contaRendaDashboard($conexao, $anoAtual);
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Indicadores <?php 	$date = date('F');
+        Dashboard | <?php 	$date = date('F');
                     echo ucfirst(strftime("%B", strtotime( $date )));
                     ?>
-        <small>Dashboard de indicadores</small>
+        <small>painel de indicadores</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
