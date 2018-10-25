@@ -171,7 +171,8 @@ $rendaMensal = contaRendaDashboard($conexao, $anoAtual);
 
       pieHole: 0.4,
       pieSliceText: 'value',
-      legend: { position: 'top', alignment: 'center'}
+      legend: { position: 'top', alignment: 'center'},
+      colors: ['#3c8dbc', '#00a65a', '#dd4b39', '#f39c12', '#00c0ef']
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
@@ -189,7 +190,7 @@ $rendaMensal = contaRendaDashboard($conexao, $anoAtual);
     var chartDiv = document.getElementById('chart_div');
 
     var data = google.visualization.arrayToDataTable([
-      [' ', 'Total', 'Total Empresa'],
+      [' ', 'Total Motoristas', 'Total Empresa'],
       <?php foreach ($rendaMensal as $lancamento) : ?>
         ['<?= $lancamento['data']?>',<?= $lancamento['val_total']?>,<?= $lancamento['val_total_empresa']?>],
       <?php endforeach ?>
@@ -197,6 +198,7 @@ $rendaMensal = contaRendaDashboard($conexao, $anoAtual);
 
     var materialOptions = {
       legend: { position: 'top', alignment: 'center'},
+      colors: ['#3c8dbc', '#00a65a', '#dd4b39', '#f39c12', '#00c0ef']
     };
 
     function drawMaterialChart() {
