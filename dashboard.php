@@ -2,11 +2,6 @@
 setlocale(LC_ALL, "pt_BR", "pt_BR.iso-8859-1", "pt_BR.utf-8", "portuguese");
 date_default_timezone_set('America/Sao_Paulo');
 
-//RESETA TODOS OS COOKIES
-foreach($_COOKIE as $key=>$ck){
-  setcookie($key, $ck, time()-3600); //seta o cookie com vencimento no passado, invalidando-o
-}
-
 require_once 'logica-usuario.php';
 verificaUsuario(); verificaAdmin();
 require_once 'header.php';
