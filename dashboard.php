@@ -62,7 +62,7 @@ $rendaMensal = contaRendaDashboard($conexao, $anoAtual);
               
 
               <div class="info-box-content">
-                <span class="info-box-text">KM</span>
+                <span class="info-box-text">Total KM</span>
                 <span class="h1"><?= $kms['total'] ?></span>
               </div>
               <!-- /.info-box-content -->
@@ -79,7 +79,7 @@ $rendaMensal = contaRendaDashboard($conexao, $anoAtual);
               <span class="info-box-icon bg-aqua"><i class="fa fa-usd"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">TOTAL</span>
+                <span class="info-box-text">TOTAL MOTORISTAS</span>
                 R$ <span class="h2"><?= $valTotal['total'] ?></span>
               </div>
               <!-- /.info-box-content -->
