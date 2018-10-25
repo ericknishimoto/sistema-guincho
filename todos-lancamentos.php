@@ -182,19 +182,23 @@ if(isset($_GET["motorista"])) {
                         </a>
                       </td>
                   </tr>
-
                 <?php
                 }
                 ?>
                 </tbody>
-                <tbody>
+                  <tfoot>
                   <tr>
-                  <th colspan="3">Total:</th>
-                  <th id="somaValTotal"></th>
-                  <th colspan="4">Total Empresa:</th>
-                  <th id="somaValTotalEmpresa"></th>
+                    <th>#Ordem</th>
+                    <th>Data</th>
+                    <th>Motorista</th>
+                    <th>Empresa</th>
+                    <th>Produto</th>
+                    <th>Serviço</th>
+                    <th>Total</th>
+                    <th>Total Emp</th>
+                    <th id="thAcoes" class="text-center">Ações</th>
                   </tr>
-                </tbody>
+                  </tfoot>
               </table>
             </div>
             <!-- /.box-body -->
