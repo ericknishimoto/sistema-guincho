@@ -136,7 +136,7 @@ $(document).ready(function() {
     // Setup - add a text input to each footer cell
     $('#example1 .filtro th').each( function () {
         var title = $(this).text();
-        $(this).html( '<input type="text" class="form-control filtro-width text-center" placeholder="Filtrar" />' );
+        $(this).html( '<input type="text" id="input-filtro" class="form-control filtro-width text-center" placeholder="Filtrar" />' );
     } );
  
     // DataTable
