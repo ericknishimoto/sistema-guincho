@@ -237,10 +237,10 @@ require_once 'footer.php';
 ?>
 
 <script>
-function capturaMotorista(el) {
-  var $lnk = document.getElementById("lnk-nome");
-  $lnk.href = $lnk.href.replace(/motorista=(.*)/, 'motorista=') + el.value;
-}
+  function capturaMotorista(el) {
+    var $lnk = document.getElementById("lnk-nome");
+    $lnk.href = $lnk.href.replace(/motorista=(.*)/, 'motorista=') + el.value;
+  }
 </script>
 
 <!-- ATIVAR NAV -->

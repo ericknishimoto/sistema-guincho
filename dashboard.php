@@ -1,4 +1,8 @@
-<?php
+<?php 
+
+setlocale(LC_ALL, "pt_BR", "pt_BR.iso-8859-1", "pt_BR.utf-8", "portuguese");
+	date_default_timezone_set('America/Sao_Paulo');
+
 
 require_once 'logica-usuario.php';
 verificaUsuario(); verificaAdmin();
@@ -6,14 +10,15 @@ require_once 'header.php';
 require_once 'conecta.php';
 require_once 'banco.php';
 
-$mesAtual = date('m');
-$lancamentos = contaLancamentosDashboard($conexao,$mesAtual);
-$kms = contaKmsDashboard($conexao,$mesAtual);
-$valTotal = str_replace('.',',', contaValTotalDashboard($conexao,$mesAtual));
-$valTotalEmp =  str_replace('.',',', contaValTotalEmpDashboard($conexao,$mesAtual));
-$kms = contaKmsDashboard($conexao,$mesAtual);
-$lancamentoMotorista = contaMotoristasDashboard($conexao,$mesAtual);
-$rendaMensal = contaRendaDashboard($conexao);
+$mesAtual = date("m");
+$anoAtual = date("Y");
+$lancamentos = contaLancamentosDashboard($conexao,$mesAtual, $anoAtual);
+$kms = contaKmsDashboard($conexao,$mesAtual, $anoAtual);
+$valTotal = str_replace('.',',', contaValTotalDashboard($conexao,$mesAtual, $anoAtual));
+$valTotalEmp =  str_replace('.',',', contaValTotalEmpDashboard($conexao,$mesAtual, $anoAtual));
+$kms = contaKmsDashboard($conexao,$mesAtual, $anoAtual);
+$lancamentoMotorista = contaMotoristasDashboard($conexao,$mesAtual, $anoAtual);
+$rendaMensal = contaRendaDashboard($conexao, $anoAtual);
 
 ?>
 
@@ -22,8 +27,10 @@ $rendaMensal = contaRendaDashboard($conexao);
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Dashboard
-        <small>Painel de indicadores</small>
+        Indicadores <?php 	$date = date('F');
+                    echo ucfirst(strftime("%B", strtotime( $date )));
+                    ?>
+        <small>Dashboard de indicadores</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -41,7 +48,7 @@ $rendaMensal = contaRendaDashboard($conexao);
               <span class="info-box-icon bg-red"><i class="fa fa-edit"></i></span>
 
                 <div class="info-box-content">
-                  <span class="info-box-text">Lançamentos Mês</span>
+                  <span class="info-box-text">Lançamentos</span>
                   <span class="h1"><?= $lancamentos['total'] ?></span>
                 </div>
               <!-- /.info-box-content -->
@@ -55,7 +62,7 @@ $rendaMensal = contaRendaDashboard($conexao);
               
 
               <div class="info-box-content">
-                <span class="info-box-text">KM Mês</span>
+                <span class="info-box-text">KM</span>
                 <span class="h1"><?= $kms['total'] ?></span>
               </div>
               <!-- /.info-box-content -->
@@ -72,7 +79,7 @@ $rendaMensal = contaRendaDashboard($conexao);
               <span class="info-box-icon bg-aqua"><i class="fa fa-usd"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">TOTAL Mês</span>
+                <span class="info-box-text">TOTAL</span>
                 R$ <span class="h2"><?= $valTotal['total'] ?></span>
               </div>
               <!-- /.info-box-content -->
@@ -85,7 +92,7 @@ $rendaMensal = contaRendaDashboard($conexao);
               <span class="info-box-icon bg-green"><i class="fa fa-suitcase"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Total Empresa Mês</span>
+                <span class="info-box-text">Total Empresa</span>
                 R$ <span class="h2"><?= $valTotalEmp['total'] ?></span>
               </div>
               <!-- /.info-box-content -->
@@ -102,7 +109,11 @@ $rendaMensal = contaRendaDashboard($conexao);
             <!-- GRAFICO PIE -->
             <div class="box box-primary">
               <div class="box-header with-border">
-                <h3 class="box-title">Lançamentos x Motoristas | Mês atual</h3>
+                <h3 class="box-title">Lançamentos x Motoristas | 
+                  <?php 	$date = date('F');
+                    echo ucfirst(strftime("%B", strtotime( $date )));
+                    ?>
+                </h3>
                 <div class="box-tools pull-right">
                   <button type="button" class="btn btn-box-tool" data-widget="collapse">
                     <i class="fa fa-minus"></i>
@@ -123,7 +134,7 @@ $rendaMensal = contaRendaDashboard($conexao);
             <!-- GRAFICO COLUMN -->
             <div class="box box-primary">
               <div class="box-header with-border">
-                <h3 class="box-title">Faturamento Mensal</h3>
+                <h3 class="box-title">Faturamento Mensal | <?= date('Y') ?></h3>
 
                 <div class="box-tools pull-right">
                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>

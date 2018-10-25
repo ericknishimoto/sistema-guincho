@@ -1,11 +1,11 @@
 <?php
-function contaLancamentosDashboard($conexao, $data) {
+function contaLancamentosDashboard($conexao, $mes, $ano) {
 
     $lancamentos = array();
     $resultado = mysqli_query($conexao, "
         select COUNT(*) as total
         from lancamentos 
-        where MONTH(data) = $data
+        where MONTH(data) = $mes and YEAR(data)= $ano
         order by data desc;
         ");
   
@@ -13,13 +13,13 @@ function contaLancamentosDashboard($conexao, $data) {
     return $lancamento;
 }
 
-function contaKmsDashboard($conexao, $data) {
+function contaKmsDashboard($conexao, $mes, $ano) {
 
     $lancamentos = array();
     $resultado = mysqli_query($conexao, "
         select SUM(km_total) as total
         from lancamentos 
-        where MONTH(data) = $data
+        where MONTH(data) = 10 and YEAR(data)= 2018
         order by data desc;
         ");
   
@@ -27,13 +27,13 @@ function contaKmsDashboard($conexao, $data) {
     return $lancamento;
 }
 
-function contaValTotalDashboard($conexao, $data) {
+function contaValTotalDashboard($conexao, $mes, $ano) {
 
     $lancamentos = array();
     $resultado = mysqli_query($conexao, "
         select SUM(val_total) as total
         from lancamentos 
-        where MONTH(data) = $data
+        where MONTH(data) = $mes and YEAR(data)= $ano
         order by data desc;
         ");
   
@@ -41,13 +41,13 @@ function contaValTotalDashboard($conexao, $data) {
     return $lancamento;
 }
 
-function contaValTotalEmpDashboard($conexao, $data) {
+function contaValTotalEmpDashboard($conexao, $mes, $ano) {
 
     $lancamentos = array();
     $resultado = mysqli_query($conexao, "
         select SUM(val_total_empresa) as total
         from lancamentos 
-        where MONTH(data) = $data
+        where MONTH(data) = $mes and YEAR(data)= $ano
         order by data desc;
         ");
   
@@ -55,7 +55,7 @@ function contaValTotalEmpDashboard($conexao, $data) {
     return $lancamento;
 }
 
-function contaMotoristasDashboard($conexao, $data) {
+function contaMotoristasDashboard($conexao, $mes, $ano) {
 
     $lancamentos = array();
     $resultado = mysqli_query($conexao, "
@@ -79,7 +79,7 @@ function contaMotoristasDashboard($conexao, $data) {
         join servicos as s
         on s.id = l.servicos_id
         
-        where MONTH(data) = $data
+        where MONTH(data) = $mes and YEAR(data)= $ano
         
         group by motorista_nome
         ");
@@ -90,7 +90,7 @@ function contaMotoristasDashboard($conexao, $data) {
           return $lancamentos;
 }
 
-function contaRendaDashboard($conexao) {
+function contaRendaDashboard($conexao,  $ano) {
 
     $lancamentos = array();
     $resultado = mysqli_query($conexao, "
@@ -116,6 +116,8 @@ function contaRendaDashboard($conexao) {
         join servicos as s
         on s.id = l.servicos_id
         
+        where YEAR(data)= $ano
+
         group by MONTHNAME(data)
         ORDER BY l.data
         ");
