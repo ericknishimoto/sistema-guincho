@@ -186,14 +186,12 @@ if(isset($_GET["motorista"])) {
                 }
                 ?>
                 </tbody>
-                  <tfoot>
+                  <tfoot style="background-color: lightgrey;">
                     <tr>
-                    <th colspan="6">SOMA TOTAL:</th>
-                    <th id="somaValTotal"></th>
-                    <th id="somaValTotalEmpresa"></th>
-                    <th>
-                      <a onclick="somaValores()" class="btn btn-success">Somar</a>
-                    </th>
+                      <th colspan="6" >SOMA TOTAL:</th>
+                      <th id="somaValTotal"></th>
+                      <th id="somaValTotalEmpresa"></th>
+                      <th></th>
                     </tr>
                   </tfoot>
               </table>

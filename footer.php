@@ -122,7 +122,6 @@
 
 <!-- TABELA TODOS LANCAMENTOS -->
 <script>
-  
   $(document).ready(function() {
     // Setup - add a text input to each footer cell
     $('#example1 thead tr').clone(true).appendTo( '#example1 thead' );
@@ -136,6 +135,7 @@
                     .column(i)
                     .search( jQuery.fn.DataTable.ext.type.search.string(this.value) ) //jQuery.fn.DataTable.ext.type.search.string: remove acentos;
                     .draw();
+                    somaValores();
             }
         } );
     } );
@@ -147,6 +147,7 @@
   } );
 
   $(document).ready(function() {
+    somaValores()
     let ultimoInput = document.querySelector("#thAcoes > input");
     ultimoInput.style.display="none";
 
