@@ -48,7 +48,7 @@ require_once 'banco.php';
       $ref_externa,$veiculo,$placa,$km_total,$pedagio_decimal,$extras,$origem,$destino,$val_total,$val_total_empresa,$obs))
       {
         $id= mysqli_insert_id($conexao);
-        header ("Location: form-novo-lancamento.php?cadastro=true&id=".$id);
+        header ("Location: form-novo-lancamento?cadastro=true&id=".$id);
         die();
       }else{ 
       ?>

@@ -15,7 +15,7 @@ function verificaUsuario() {
 
 function verificaAdmin() {
   if($_SESSION["usuario_permissao"] != "admin") {
-     header("Location: sem-permissao.php");
+     header("Location: sem-permissao");
      die();
   }
 }

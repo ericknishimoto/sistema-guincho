@@ -28,7 +28,7 @@ require_once 'banco.php';
       
       if(excluiLancamento($conexao,$id))
       {
-        header ("Location: todos-lancamentos.php?exclusao=true&id=".$id);
+        header ("Location: todos-lancamentos?exclusao=true&id=".$id);
         die();
       }else{ 
       ?>

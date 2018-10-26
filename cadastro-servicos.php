@@ -126,7 +126,7 @@ $servicos = listaServicos($conexao);
     <div class="row">
       <div class="col-xs-7 col-md-3">
         <button type="button" class="btn btn-success margin-bottom" data-toggle="modal" data-target="#modal-novo">
-            <span>Nova Serviço</span>
+            <span>Novo Serviço</span>
           </button>
       </div>
     </div>
@@ -189,7 +189,7 @@ $servicos = listaServicos($conexao);
       <div class="modal-content">
         <div class="modal-header modal-success">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Nova Serviço</h4>
+          <h4 class="modal-title" id="myModalLabel">Novo Serviço</h4>
         </div>
         <div class="modal-body">
           <form action="adiciona-servico.php" id="form" method="POST">

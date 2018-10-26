@@ -83,7 +83,7 @@ if(isset($_GET["motorista"])) {
     <div class="row">
 <?php if ($_SESSION["usuario_permissao"] == "admin"){?>
       <div class="col-sm-4 col-md-3">
-        <a href="form-novo-lancamento.php" class="btn btn-block btn-success margin-bottom">
+        <a href="form-novo-lancamento" class="btn btn-block btn-success margin-bottom">
           <span>Novo Lançamento</span>
         </a>
       </div>
@@ -98,7 +98,7 @@ if(isset($_GET["motorista"])) {
             <?php endforeach ?>
           </select>
           <span class="input-group-btn">
-            <a href="todos-lancamentos.php?motorista=todos" id="lnk-nome" class="btn btn-default btn-block margin-bottom"><i class="fa  fa-search"></i></a>
+            <a href="todos-lancamentos?motorista=todos" id="lnk-nome" class="btn btn-default btn-block margin-bottom"><i class="fa  fa-search"></i></a>
           </span>
         </div>
 
@@ -136,7 +136,7 @@ if(isset($_GET["motorista"])) {
                 $data_convertida = str_replace('-','/', $data);
                 ?>
                       <td class="text-center">
-                        <a href="lancamento.php?id=<?= $lancamento['id'] ?>">
+                        <a href="lancamento?id=<?= $lancamento['id'] ?>">
                           <p class="ordem"><?= $lancamento['id'] ?></p>
                         </a>
                       </td>
@@ -152,9 +152,9 @@ if(isset($_GET["motorista"])) {
                         <input type="hidden" id="val_total_empresa" value="<?= $lancamento['val_total_empresa'] ?>" />
                       </td>
                       <td class="min-width1 text-center">
-                        <a href="lancamento.php?id=<?= $lancamento['id'] ?>" class="btn btn-default"><i class="fa fa-eye"></i></a>
-                        <a href="form-altera-lancamento.php?id=<?= $lancamento['id'] ?>" class="btn btn-default"><i class="fa fa-pencil"></i></a>
-                        <a data-url="exclui-lancamento.php?id=" data-id="<?= $lancamento['id'] ?>" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete">
+                        <a href="lancamento?id=<?= $lancamento['id'] ?>" class="btn btn-default"><i class="fa fa-eye"></i></a>
+                        <a href="form-altera-lancamento?id=<?= $lancamento['id'] ?>" class="btn btn-default"><i class="fa fa-pencil"></i></a>
+                        <a data-url="exclui-lancamento?id=" data-id="<?= $lancamento['id'] ?>" class="btn btn-danger" data-toggle="modal" data-target="#modal-delete">
                           <i class="fa fa-trash-o"></i>
                         </a>
                       </td>

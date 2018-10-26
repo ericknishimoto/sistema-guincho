@@ -240,7 +240,7 @@ $servicos = listaServicos($conexao);
         <div class="row">
             <div class="center-block text-center">
               <input type="submit" class="btn btn-success margin-bottom margin" value="Cadastrar">
-              <a href="todos-lancamentos.php" class="btn btn-default margin-bottom margin">Voltar</a>
+              <a href="todos-lancamentos" class="btn btn-default margin-bottom margin">Voltar</a>
             </div>
           </div>
       </form>

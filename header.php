@@ -73,13 +73,13 @@
           <!-- User Account: style can be found in dropdown.less -->
 <?php if ($_SESSION["usuario_permissao"] == "admin"){?> 
           <li class="user user-menu">
-            <a href="form-novo-lancamento.php">
+            <a href="form-novo-lancamento">
 
               <span>Novo Lançamento</span>
             </a>
           </li>
           <li class="dropdown user user-menu hidden-xs">
-            <a href="cadastro-usuarios.php">
+            <a href="cadastro-usuarios">
               <img src="dist/img/user.png" class="user-image" alt="User Image">
               <span><?= $_SESSION["usuario_nome"] ?></span>
             </a>
@@ -87,7 +87,7 @@
 <?php } ?>
           <!-- Control Sidebar Toggle Button -->
           <li>
-            <a href="logout.php">Sair</i></a>
+            <a href="logout">Sair</i></a>
           </li>
         </ul>
       </div>
@@ -112,13 +112,13 @@
         <li class="header">PRINCIPAL</li>
 <?php if ($_SESSION["usuario_permissao"] == "admin"){?> 
         <li id="dashboard">
-          <a href="dashboard.php">
+          <a href="dashboard">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
 <?php } ?>
         <li id="lancamentos">
-          <a href="todos-lancamentos.php">
+          <a href="todos-lancamentos">
             <i class="fa fa-list"></i> <span>Lançamentos</span>
           </a>
         </li>    
@@ -140,14 +140,14 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li id="motoristas"><a href="cadastro-motoristas.php"><i class="fa fa-circle-o"></i> Motoristas</a></li>
-              <li id="empresas"><a href="cadastro-empresas.php"><i class="fa fa-circle-o"></i> Empresas</a></li>
-              <li id="produtos"><a href="cadastro-produtos.php"><i class="fa fa-circle-o"></i> Produtos</a></li>
-              <li id="servicos"><a href="cadastro-servicos.php"><i class="fa fa-circle-o"></i> Serviços</a></li>
+              <li id="motoristas"><a href="cadastro-motoristas"><i class="fa fa-circle-o"></i> Motoristas</a></li>
+              <li id="empresas"><a href="cadastro-empresas"><i class="fa fa-circle-o"></i> Empresas</a></li>
+              <li id="produtos"><a href="cadastro-produtos"><i class="fa fa-circle-o"></i> Produtos</a></li>
+              <li id="servicos"><a href="cadastro-servicos"><i class="fa fa-circle-o"></i> Serviços</a></li>
             </ul>
           </li>
-        <li id="usuarios"><a href="cadastro-usuarios.php"><i class="fa fa-users"></i> <span>Usuários</span></a></li>
-        <li id="regras"><a href="#.php">
+        <li id="usuarios"><a href="cadastro-usuarios"><i class="fa fa-users"></i> <span>Usuários</span></a></li>
+        <li id="regras"><a href="#">
         <i class="fa fa-cogs"></i> <span>Regras de Negócio</span>
         <span class="pull-right-container">
               <small class="label pull-right bg-red">EM DEV</small>

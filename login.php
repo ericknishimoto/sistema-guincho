@@ -11,6 +11,6 @@ if($usuario == null) {
     header("Location: index.php?login=0");
 } else {
     logaUsuario($usuario["email"], $usuario["nome"], $usuario["permissao"]);
-    header("Location: index.php");
+    header("Location: index");
 }
 die();

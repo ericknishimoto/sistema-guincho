@@ -48,7 +48,7 @@ require_once 'banco.php';
       if(alteraLancamento($conexao,$id,$date_for_database,$motorista,$empresa,$produto,$servico,$workorder,
       $ref_externa,$veiculo,$placa,$km_total,$pedagio_decimal,$extras,$origem,$destino,$val_total,$val_total_empresa,$obs))
       {
-        header ("Location: todos-lancamentos.php?alteracao=true&id=".$id);
+        header ("Location: todos-lancamentos?alteracao=true&id=".$id);
         die();
       }else{ 
       ?>
