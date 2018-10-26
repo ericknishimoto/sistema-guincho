@@ -119,7 +119,7 @@
           <a href="#">
             <i class="fa fa-line-chart"></i> <span>Relatórios</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-gray">EM DEV</small>
+              <small class="label pull-right bg-red">EM DEV</small>
             </span>
           </a>
         </li>
@@ -142,7 +142,7 @@
         <li id="regras"><a href="#.php">
         <i class="fa fa-cogs"></i> <span>Regras de Negócio</span>
         <span class="pull-right-container">
-              <small class="label pull-right bg-gray">EM DEV</small>
+              <small class="label pull-right bg-red">EM DEV</small>
         </span>
         </a></li>
 <?php } ?> 
