@@ -33,30 +33,6 @@ if(isset($_GET["motorista"])) {
     <!-- Main content -->
     <section class="content">
 
-<?php if(isset($_GET["cadastro"]) && $_GET["cadastro"]==true) {
-?>
-    <div class="row">
-      <div class="col-xs-8">
-      <div class="box box-success box-solid">
-            <div class="box-header with-border">
-              <h3 class="box-title">Cadastrado</h3>
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-              <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-            O lançamento #<?=$_GET["id"] ?> foi cadastrado com sucesso!
-            </div>
-            <!-- /.box-body -->
-          </div>
-      </div>
-    </div>
-<?php
-  }
-?>
-
 <?php if(isset($_GET["alteracao"]) && $_GET["alteracao"]==true) {
 ?>
     <div class="row">
@@ -71,7 +47,7 @@ if(isset($_GET["motorista"])) {
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            O lançamento #<?=$_GET["id"] ?> foi alterado com sucesso!
+            A ordem #<?=$_GET["id"] ?> foi alterada com sucesso!
             </div>
             <!-- /.box-body -->
           </div>
@@ -95,7 +71,7 @@ if(isset($_GET["motorista"])) {
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            O lançamento #<?=$_GET["id"] ?> foi excluído com sucesso!
+            A ordem #<?=$_GET["id"] ?> foi excluída com sucesso!
             </div>
             <!-- /.box-body -->
           </div>
@@ -140,7 +116,7 @@ if(isset($_GET["motorista"])) {
               <table id="example1" class="table table-bordered table-striped compact text-center">
                 <thead>
                 <tr>
-                  <th>#Ordem</th>
+                  <th>Nº Ordem</th>
                   <th>Data</th>
                   <th>Motorista</th>
                   <th>Empresa</th>

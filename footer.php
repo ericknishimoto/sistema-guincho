@@ -142,7 +142,11 @@
  
     var table = $('#example1').DataTable( {
         orderCellsTop: true,
-        fixedHeader: true
+        fixedHeader: true,
+        lengthChange: false,
+        paging: false,
+        info: false,
+        autoWidth: false
     } );
   } );
 
