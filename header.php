@@ -71,12 +71,13 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- User Account: style can be found in dropdown.less -->
-          <li>
+          <li class="user user-menu">
             <a href="form-novo-lancamento.php">
-              <i class="fa fa-plus-circle" style="font-size: 19px;"></i>
+
+              <span>Novo Lançamento</span>
             </a>
           </li>
-          <li class="dropdown user user-menu">
+          <li class="dropdown user user-menu hidden-xs">
             <a href="cadastro-usuarios.php">
               <img src="dist/img/user.png" class="user-image" alt="User Image">
               <span><?= $_SESSION["usuario_nome"] ?></span>
