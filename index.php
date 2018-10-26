@@ -42,7 +42,6 @@ include("logica-usuario.php");
   </div>
 
 <?php
-
 if(isset($_SESSION["usuario_logado"])) {
     if ($_SESSION["usuario_permissao"] == "admin"){
       header("Location: dashboard.php");
