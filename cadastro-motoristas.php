@@ -140,7 +140,7 @@ $motoristas = listaMotoristas($conexao);
             </div>
             <!-- /.box-header -->
             <!-- TABLE -->
-            <div class="box-body table-responsive">
+            <div class="box-body ">
               <table id="tabela" class="table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
