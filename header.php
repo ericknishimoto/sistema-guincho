@@ -71,6 +71,11 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- User Account: style can be found in dropdown.less -->
+          <li>
+            <a href="form-novo-lancamento.php">
+            <i class="fa fa-plus-circle" style="font-size: 19px;"></i>
+            </a>
+          </li>
           <li class="dropdown user user-menu">
             <a href="cadastro-usuarios.php">
               <img src="dist/img/user.png" class="user-image" alt="User Image">
