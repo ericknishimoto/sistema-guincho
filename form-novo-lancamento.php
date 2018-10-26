@@ -166,7 +166,7 @@ $servicos = listaServicos($conexao);
                       <label>Pedágio:</label>
                       <!-- Input number com casa decimal -->
                       
-                        <input type="number" required name="pedagio" class="form-control" name="price" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$"">
+                        <input type="number" name="pedagio" class="form-control" name="price" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$"">
                       
                     </div>
                   </div>
