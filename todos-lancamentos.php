@@ -81,13 +81,14 @@ if(isset($_GET["motorista"])) {
   }
 ?>
     <div class="row">
+<?php if ($_SESSION["usuario_permissao"] == "admin"){?>
       <div class="col-sm-4 col-md-3">
         <a href="form-novo-lancamento.php" class="btn btn-block btn-success margin-bottom">
           <span>Novo Lançamento</span>
         </a>
       </div>
+<?php } ?>
       <div class="col-sm-5 col-md-4">
-
         <div class="input-group">
         <select onchange="capturaMotorista(this)" id="select_id" type="text" required name="motoristas_nome" class="form-control altera-empresa">
             <option value="todos" disabled selected>Filtra motorista</option>

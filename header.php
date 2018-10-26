@@ -71,6 +71,7 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- User Account: style can be found in dropdown.less -->
+<?php if ($_SESSION["usuario_permissao"] == "admin"){?> 
           <li class="user user-menu">
             <a href="form-novo-lancamento.php">
 
@@ -83,6 +84,7 @@
               <span><?= $_SESSION["usuario_nome"] ?></span>
             </a>
           </li>
+<?php } ?>
           <!-- Control Sidebar Toggle Button -->
           <li>
             <a href="logout.php">Sair</i></a>
