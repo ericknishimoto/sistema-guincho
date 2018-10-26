@@ -187,17 +187,14 @@ if(isset($_GET["motorista"])) {
                 ?>
                 </tbody>
                   <tfoot>
-                  <tr>
-                    <th>#Ordem</th>
-                    <th>Data</th>
-                    <th>Motorista</th>
-                    <th>Empresa</th>
-                    <th>Produto</th>
-                    <th>Serviço</th>
-                    <th>Total</th>
-                    <th>Total Emp</th>
-                    <th id="thAcoes" class="text-center">Ações</th>
-                  </tr>
+                    <tr>
+                    <th colspan="6">SOMA TOTAL:</th>
+                    <th id="somaValTotal"></th>
+                    <th id="somaValTotalEmpresa"></th>
+                    <th>
+                      <a onclick="somaValores()" class="btn btn-success">Somar</a>
+                    </th>
+                    </tr>
                   </tfoot>
               </table>
             </div>

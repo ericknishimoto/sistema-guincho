@@ -180,5 +180,48 @@
     }
 </script>
 
+<!-- VALORES TODOS LANCAMENTOS -->
+<script>
+  function somaValores(){
+       let valTotal = document.querySelectorAll("#val_total"); //Seleciona todas as ID ##val_total e captura o valor.
+      let somaValTotal = 0;
+       let valTotalEmpresa = document.querySelectorAll("#val_total_empresa"); //Seleciona todas as ID ##val_total e captura o valor.
+      let somaValTotalEmpresa = 0;
+       for (var i = 0; i < valTotal.length; i++ ){
+        valor = parseFloat(valTotal[i].value);
+        somaValTotal =  somaValTotal + valor
+         var thValTotal = document.querySelector("#somaValTotal");
+        thValTotal.innerHTML = "R$" + parseFloat(somaValTotal).toFixed(2);
+      }
+       for (var i = 0; i < valTotalEmpresa.length; i++ ){
+        valor = parseFloat(valTotalEmpresa[i].value);
+        somaValTotalEmpresa =  somaValTotalEmpresa + valor
+    
+        var thValTotalEmpresa = document.querySelector("#somaValTotalEmpresa");
+        thValTotalEmpresa.innerHTML = "R$" + parseFloat(somaValTotalEmpresa).toFixed(2);
+      }
+     var campoFiltro = document.querySelector("[type=search]");
+    campoFiltro.addEventListener("input", function(){ //input: escuta o input de dados;
+      let valTotal = document.querySelectorAll("#val_total"); //Seleciona todas as ID ##val_total e captura o valor.
+      let somaValTotal = 0;
+       let valTotalEmpresa = document.querySelectorAll("#val_total_empresa"); //Seleciona todas as ID ##val_total e captura o valor.
+      let somaValTotalEmpresa = 0;
+       for (var i = 0; i < valTotal.length; i++ ){
+        valor = parseFloat(valTotal[i].value);
+        somaValTotal =  somaValTotal + valor
+         var thValTotal = document.querySelector("#somaValTotal");
+        thValTotal.innerHTML = "R$" + parseFloat(somaValTotal).toFixed(2);
+       }
+       for (var i = 0; i < valTotalEmpresa.length; i++ ){
+        valor = parseFloat(valTotalEmpresa[i].value);
+        somaValTotalEmpresa =  somaValTotalEmpresa + valor
+    
+        var thValTotalEmpresa = document.querySelector("#somaValTotalEmpresa");
+        thValTotalEmpresa.innerHTML = "R$" + parseFloat(somaValTotalEmpresa).toFixed(2);
+      }
+    })
+  };
+</script>
+
 </body>
 </html>

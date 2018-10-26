@@ -32,4 +32,5 @@ function logaUsuario($email,$nome, $permissao) {
 
 function logout() {
   session_destroy();
+  session_start();
 }

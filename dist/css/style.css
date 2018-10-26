@@ -87,3 +87,7 @@ margin-top: 4rem;
   .filtro-width{
       max-width: 95px;
   }
+
+#example1{
+    vertical-align: center!important;
+}
