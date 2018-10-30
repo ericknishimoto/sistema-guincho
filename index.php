@@ -63,7 +63,7 @@ if(isset($_GET["falhaDeSeguranca"])) {
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                Faço o login para continuar.
+                Faça o login para continuar.
                 </div>
                 <!-- /.box-body -->
             </div>
